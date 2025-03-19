@@ -1,7 +1,7 @@
 :root {
     /* Base Colors */
-    --bg-primary: #000000;
-    --bg-secondary: #111111;
+    --bg-primary: #00000F;
+    --bg-secondary: #11111B;
     --bg-tertiary: #1a1a1a;
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
@@ -9,12 +9,12 @@
     
     /* Accent Colors */
     --accent-blue: #0070f3;
-    --accent-purple: #7928ca;
+    --accent-purple: #8826f9;
     --accent-cyan: #50e3c2;
     --accent-pink: #ff0080;
     
     /* UI Elements */
-    --input-bg: #111111;
+    --input-bg: #11111B;
     --input-border: #333333;
     --button-bg: #111111;
     --button-hover: #1a1a1a;
