@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JWT Debugger - Ferramenta online gratuita para validar e decodificar tokens JWT" />
+    <meta name="keywords" content="jwt, json web token, validator, validador, decoder, decodificador, ferramenta, online, gratuito" />
+    <meta name="author" content="Adriano Freitas" />
+    <title>JWT Debugger - Drian</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.adrianofreitas.me/jwt/">
+    <meta property="og:title" content="JWT Debugger - Adriano Freitas">
+    <meta property="og:description" content="Ferramenta online gratuita para validar e decodificar tokens JWT">
+    <meta property="og:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.adrianofreitas.me/jwt/">
+    <meta property="twitter:title" content="JWT Debugger - Adriano Freitas">
+    <meta property="twitter:description" content="Ferramenta online gratuita para validar e decodificar tokens JWT">
+    <meta property="twitter:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../src/images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../src/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../src/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../src/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../src/css/index.css">
+    <link rel="stylesheet" href="../../src/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <header>
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
+                </a>
+            </div>
+            <h1>JWT Debugger</h1>
+            <nav>
+                <ul>
+                <li><a href="../../index.html"">Home</a></li>
+                <li><a href="../../index.html">Tools</a></li>   
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-description">
+                <p>This tool allows you to decode and validate JWTs (JSON Web Tokens). Paste your JWT to view its contents and verify its validity.</p>
+            </div>
+        
+            <div class="tool-panel">
+                <div class="input-section">
+                    <h2>JWT Token</h2>
+                    <textarea id="jwt-input" placeholder="Paste your JWT here (format: xxxxx.yyyyy.zzzzz)"></textarea>
+                </div>
+        
+                <div class="actions">
+                    <button id="decode-btn" class="action-btn">Decode Token</button>
+                    <button id="validate-btn" class="action-btn">Validate Signature</button>
+                    <button id="clear-btn" class="action-btn secondary">Clear</button>
+                </div>
+        
+                <div class="secret-key-section" id="secret-key-section" style="display: none;">
+                    <h2>Secret Key (for validation)</h2>
+                    <textarea id="secret-key" placeholder="Paste the secret key to validate the token's signature"></textarea>
+                </div>
+        
+                <div class="output-section">
+                    <div class="output-tabs">
+                        <button class="tab-btn active" data-tab="header">Header</button>
+                        <button class="tab-btn" data-tab="payload">Payload</button>
+                        <button class="tab-btn" data-tab="signature">Signature</button>
+                    </div>
+                    <div class="tab-content">
+                        <div id="header-tab" class="tab-pane active">
+                            <h3>Header</h3>
+                            <pre id="header-output" class="json-output">Decode a token to see the header</pre>
+                        </div>
+                        <div id="payload-tab" class="tab-pane">
+                            <h3>Payload</h3>
+                            <pre id="payload-output" class="json-output">Decode a token to see the payload</pre>
+                        </div>
+                        <div id="signature-tab" class="tab-pane">
+                            <h3>Signature</h3>
+                            <div id="signature-output" class="signature-output">
+                                <p>Decode a token to see signature information</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="token-info">
+                <div class="token-status" id="token-status">
+                    <!-- Token status will be displayed here -->
+                </div>
+                <div class="token-expiry" id="token-expiry">
+                    <!-- Expiration info will be displayed here -->
+                </div>
+            </div>
+        
+            <div class="tool-info">
+                <h3>About JWT (JSON Web Tokens)</h3>
+                <p>JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.</p>
+                <p>A JWT consists of three parts separated by dots:</p>
+                <ul>
+                    <li><strong>Header</strong>: Contains the type of the token and the signing algorithm used</li>
+                    <li><strong>Payload</strong>: Contains the claims, which are statements about an entity (typically the user) and additional data</li>
+                    <li><strong>Signature</strong>: Verifies that the sender of the JWT is who it claims to be and ensures that the message wasn't altered</li>
+                </ul>
+                <p>JWTs are commonly used for:</p>
+                <ul>
+                    <li>Authentication: When a user logs in, every subsequent request will include the JWT</li>
+                    <li>Information exchange: JWTs are a good way to securely transmit information between parties</li>
+                    <li>Authorization: Once the user is logged in, the JWT allows access to routes, services, and resources permitted with that token</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>      
+            <div class="footer">
+            <div class="footer-text">
+                <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px">  <span id="current-year"></span> Adriano Freitas</p>
+            </div>
+            </div>
+        </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Open Redirect Tester - Check endpoints for unsafe redirection." />
+  <meta name="author" content="Adriano Freitas" />
+  <title>Open Redirect Tester - Adriano Freitas</title>
+  <link rel="stylesheet" href="../../../src/css/index.css">
+  <link rel="stylesheet" href="../../src/css/style.css">
+</head>
+<body>
+  <div class="tool-container">
+    <header>
+      <div class="logo">
+        <a href="../../index.html">
+          <img src="../../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
+        </a>
+      </div>
+      <h1>Open Redirect Tester</h1>
+      <nav>
+        <ul>
+          <li><a href="../../index.html"">Home</a></li>
+          <li><a href="../../index.html">Tools</a></li>      
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="tool-description">
+        <p>This tool tests if a given URL is vulnerable to open redirects by injecting known payloads into redirection parameters.</p>
+      </div>
+
+      <div class="tool-panel">
+        <div class="input-section">
+          <h2>Target URL</h2>
+          <input type="text" id="url-input" placeholder="https://example.com/redirect" />
+
+          <h3>Redirection Parameters</h3>
+          <input type="text" id="param-input" placeholder="e.g. url,next,redirect" title="Comma-separated list of redirection parameters" />
+        </div>
+
+        <div class="actions">
+          <button id="test-btn" class="action-btn">Test Redirects</button>
+          <button id="clear-btn" class="action-btn secondary">Clear</button>
+        </div>
+
+        <div class="output-section">
+          <h2>Results</h2>
+          <div id="results" class="json-output">Test results will appear here.</div>
+        </div>
+
+        <div class="output-section">
+          <h2>iFrame Preview</h2>
+          <iframe id="redirect-frame" sandbox="allow-same-origin allow-scripts" style="width:100%; height:300px; border:1px solid #181825;"></iframe>
+        </div>
+      </div>
+    </main>
+
+    <footer>      
+        <div class="footer">
+          <div class="footer-text">
+            <img src="../../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px">  <span id="current-year"></span> Adriano Freitas</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

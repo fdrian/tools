@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Base64 Encoder e Decoder - Ferramenta online gratuita para codificar e decodificar strings em Base64" />
+    <meta name="keywords" content="base64, encoder, decoder, codificador, decodificador, ferramenta, online, gratuito" />
+    <meta name="author" content="Adriano Freitas" />
+    <title>Base64 Debugger - Drian</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.adrianofreitas.me/base64/">
+    <meta property="og:title" content="Base64 Encoder/Decoder - Adriano Freitas">
+    <meta property="og:description" content="Ferramenta online gratuita para codificar e decodificar strings em Base64">
+    <meta property="og:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.adrianofreitas.me/base64/">
+    <meta property="twitter:title" content="Base64 Encoder/Decoder - Adriano Freitas">
+    <meta property="twitter:description" content="Ferramenta online gratuita para codificar e decodificar strings em Base64">
+    <meta property="twitter:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../src/images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../src/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../src/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../src/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../src/css/index.css">
+    <link rel="stylesheet" href="../../src/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <header>
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
+                </a>
+            </div>
+            <h1>Base64 Debugger</h1>
+            <nav>                
+                <ul>
+                    <li><a href="../../index.html"">Home</a></li>
+                    <li><a href="../../index.html">Tools</a></li>                
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-description">
+                <p>This tool allows you to encode text to Base64 and decode Base64 strings back to text. Base64 is a group of binary-to-text encoding schemes that represent binary data in an ASCII string format.</p>
+            </div>
+        
+            <div class="tool-panel">
+                <div class="input-section">
+                    <h2>Input</h2>
+                    <textarea id="input-text" placeholder="Enter text to encode or Base64 string to decode"></textarea>
+                </div>
+        
+                <div class="actions">
+                    <button id="encode-btn" class="action-btn">Encode to Base64</button>
+                    <button id="decode-btn" class="action-btn">Decode from Base64</button>
+                    <button id="clear-btn" class="action-btn secondary">Clear</button>
+                    <button id="copy-btn" class="action-btn secondary">Copy Result</button>
+                    <div class="live-mode-wrapper">
+                        <label class="live-toggle">
+                            <input type="checkbox" id="live-toggle">
+                            Live Mode
+                        </label>
+                        <select id="live-mode-select" disabled>
+                            <option value="encode">Live Encode</option>
+                            <option value="decode">Live Decode</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <div class="output-section">
+                    <h2>Result</h2>
+                    <textarea id="output-text" readonly placeholder="The result will appear here"></textarea>
+                </div>
+            </div>
+        
+            <div class="tool-info">
+                <h3>About Base64</h3>
+                <p>Base64 is a method for encoding binary data into ASCII text. It is commonly used when there is a need to encode binary data that must be stored and transferred through media designed to handle textual data. This ensures that the data remains intact without modification during transport.</p>
+                <p>Common use cases include:</p>
+                <ul>
+                    <li>Sending email attachments (MIME)</li>
+                    <li>Storing complex data in XML or JSON</li>
+                    <li>Transferring images via data URLs</li>
+                    <li>Storing cryptographic keys</li>
+                </ul>
+            </div>
+        </main>
+        
+        
+
+    <footer>      
+        <div class="footer">
+          <div class="footer-text">
+            <img src="../../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px">  <span id="current-year"></span> Adriano Freitas</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

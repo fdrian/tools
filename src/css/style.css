@@ -1,0 +1,521 @@
+/* JWT Validator Tool Styles */
+:root {
+    --primary-color: #8826f9;
+    --secondary-color: #11111b;
+    --text-color: #cdd6f4;
+    --border-color: #cdd6f4;
+    --button-hover: #6c2bd9;
+    --button-secondary: #181825;
+    --button-secondary-hover: #1e1e2e;
+    --success-color: #40a02b;
+    --error-color: #d20f39;
+    --warning-color: #fe640b;
+    --info-color: #1e66f5;
+}
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-family: 'Share Tech Mono', monospace;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.tool-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    flex: 0 0 auto;
+}
+
+.logo img {
+    height: 40px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.logo img:hover {
+    opacity: 1;
+}
+
+header h1 {
+    flex: 1 0 auto;
+    margin: 0;
+    padding: 0 20px;
+    font-size: 28px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-left: 20px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+nav a:hover {
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+main {
+    padding: 20px 0;
+}
+
+/* Live Encode toggle styling */
+.live-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95em;
+    color: #cdd6f4;
+    margin-left: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.live-toggle input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #8826f9;
+    background-color: #11111b;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.live-toggle input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    width: 5px;
+    height: 10px;
+    border: solid #cdd6f4;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.live-toggle input[type="checkbox"]:checked {
+    background-color: #8826f9;
+    border-color: #8826f9;
+}
+
+.live-toggle input[type="checkbox"]:checked::after {
+    opacity: 1;
+}
+
+.live-mode-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    font-size: 0.95em;
+}
+
+.result-item {
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .result-item.vulnerable {
+    background-color: #34141a;
+    border-left: 4px solid #f38ba8;
+  }
+  
+  .result-item.partial {
+    background-color: #1f1d30;
+    border-left: 4px solid #f9e2af;
+  }
+  
+  .result-item.safe {
+    background-color: #1a1a1a;
+    border-left: 4px solid #a6e3a1;
+  }
+  
+  .highlight {
+    color: #f38ba8;
+    font-weight: bold;
+  }
+  
+
+#live-mode-select {
+    background-color: var(--button-secondary);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#live-mode-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+
+
+.tool-description {
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tool-panel {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input-section, .output-section, .secret-key-section {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+h2, h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+    font-family: 'Share Tech Mono', monospace;
+    resize: vertical;
+    font-size: 16px;
+    line-height: 1.5;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.action-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: var(--button-hover);
+}
+
+.action-btn.secondary {
+    background-color: var(--button-secondary);
+}
+
+.action-btn.secondary:hover {
+    background-color: var(--button-secondary-hover);
+}
+
+/* Tabs */
+.output-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn:hover {
+    opacity: 1;
+}
+
+.tab-btn.active {
+    opacity: 1;
+    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.tab-pane {
+    display: none;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.json-output {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.signature-output {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.token-info {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.token-status {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.token-status.valid {
+    color: var(--success-color);
+}
+
+.token-status.invalid {
+    color: var(--error-color);
+}
+
+.token-status.expired {
+    color: var(--warning-color);
+}
+
+.token-expiry {
+    font-size: 16px;
+}
+
+.tool-info {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.tool-info h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.tool-info ul {
+    padding-left: 20px;
+}
+
+.tool-info li {
+    margin-bottom: 8px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-color);
+    opacity: 0.7;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification.success {
+    background-color: var(--success-color);
+}
+
+.notification.error {
+    background-color: var(--error-color);
+}
+
+.notification.warning {
+    background-color: var(--warning-color);
+}
+
+.notification.info {
+    background-color: var(--info-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    header h1 {
+        margin: 15px 0;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    .action-btn {
+        width: 100%;
+    }
+    
+    .output-tabs {
+        flex-direction: column;
+        border-bottom: none;
+    }
+    
+    .tab-btn {
+        border-bottom: 1px solid var(--border-color);
+        text-align: left;
+        padding: 15px;
+    }
+    
+    .tab-btn.active {
+        border-left: 2px solid var(--primary-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+/* Highlight JSON syntax */
+.key {
+    color: var(--primary-color);
+}
+
+.string {
+    color: var(--success-color);
+}
+
+.number {
+    color: var(--info-color);
+}
+
+.boolean {
+    color: var(--warning-color);
+}
+
+.null {
+    color: var(--error-color);
+}
