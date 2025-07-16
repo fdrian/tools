@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Subdomain Takeover Checker - Detect vulnerable subdomains for takeover attacks">
+    <meta name="keywords" content="subdomain takeover, subdomain vulnerability, bug bounty, security, dns, cname">
+    <meta name="author" content="Adriano Freitas">
+    <title>Subdomain Takeover Checker - Drian</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.adrianofreitas.me/subdomain-takeover/">
+    <meta property="og:title" content="Subdomain Takeover Checker - Adriano Freitas">
+    <meta property="og:description" content="Detect vulnerable subdomains for takeover attacks">
+    <meta property="og:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.adrianofreitas.me/subdomain-takeover/">
+    <meta property="twitter:title" content="Subdomain Takeover Checker - Adriano Freitas">
+    <meta property="twitter:description" content="Detect vulnerable subdomains for takeover attacks">
+    <meta property="twitter:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../src/images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../src/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../src/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../src/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../src/css/index.css">
+    <link rel="stylesheet" href="../../src/css/style.css">
+</head>
+<body>
+<div class="tool-container">
+    <header>
+        <div class="logo">
+            <a href="../../index.html">
+                <img src="../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
+            </a>
+        </div>
+        <h1>Subdomain Takeover Checker</h1>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../index.html">Tools</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="tool-description">
+            <p>Detect <strong>subdomain takeover vulnerabilities</strong> by checking if subdomains point to unclaimed third-party services. Essential for bug bounty hunting and security assessments.</p>
+        </div>
+
+        <div class="tool-panel">
+            <div class="input-section">
+                <div class="input-tabs">
+                    <button id="single-tab" class="tab-btn active">Single Domain</button>
+                    <button id="bulk-tab" class="tab-btn">Bulk Check</button>
+                </div>
+                
+                <div id="single-input" class="input-container active">
+                    <h2>Enter Domain or Subdomain</h2>
+                    <input type="text" id="single-domain" placeholder="example.com or subdomain.example.com">
+                    <div class="options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="auto-discover" checked>
+                            Auto-discover subdomains
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="check-cname">
+                            Check CNAME records
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="deep-scan">
+                            Deep scan (slower but more thorough)
+                        </label>
+                    </div>
+                    <button id="check-btn" class="action-btn">Check for Takeover</button>
+                </div>
+                
+                <div id="bulk-input" class="input-container">
+                    <h2>Bulk Subdomain Check</h2>
+                    <textarea id="bulk-domains" placeholder="subdomain1.example.com
+subdomain2.example.com
+subdomain3.example.com
+..."></textarea>
+                    <button id="bulk-check-btn" class="action-btn">Bulk Check</button>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="clear-btn" class="action-btn secondary">Clear</button>
+                <button id="copy-btn" class="action-btn secondary">Copy Results</button>
+                <button id="export-btn" class="action-btn secondary">Export CSV</button>
+            </div>
+
+            <div class="output-section">
+                <h2>Takeover Analysis Results</h2>
+                <div id="results-container">
+                    <div id="loading" class="hidden">
+                        <div class="spinner"></div>
+                        <p>Checking for subdomain takeover vulnerabilities...</p>
+                    </div>
+                    <div id="results" class="results-content">
+                        <p class="placeholder">Enter domains to check for takeover vulnerabilities...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-info">
+            <h3>Vulnerable Services Detected:</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>GitHub Pages</h4>
+                    <p>Detects unclaimed github.io subdomains</p>
+                </div>
+                <div class="info-item">
+                    <h4>Heroku</h4>
+                    <p>Finds unregistered herokuapp.com applications</p>
+                </div>
+                <div class="info-item">
+                    <h4>AWS S3</h4>
+                    <p>Identifies unclaimed S3 bucket subdomains</p>
+                </div>
+                <div class="info-item">
+                    <h4>Netlify</h4>
+                    <p>Detects unclaimed netlify.app deployments</p>
+                </div>
+                <div class="info-item">
+                    <h4>Vercel</h4>
+                    <p>Finds unregistered vercel.app projects</p>
+                </div>
+                <div class="info-item">
+                    <h4>Azure</h4>
+                    <p>Identifies unclaimed Azure services</p>
+                </div>
+                <div class="info-item">
+                    <h4>Shopify</h4>
+                    <p>Detects unclaimed myshopify.com stores</p>
+                </div>
+                <div class="info-item">
+                    <h4>Custom Services</h4>
+                    <p>Checks for other third-party service patterns</p>
+                </div>
+            </div>
+            
+            <h3>Perfect for:</h3>
+            <ul>
+                <li>Bug bounty hunting and vulnerability research</li>
+                <li>Security assessments and penetration testing</li>
+                <li>Infrastructure security audits</li>
+                <li>Continuous monitoring of subdomain security</li>
+                <li>DNS misconfiguration detection</li>
+                <li>Third-party service security validation</li>
+            </ul>
+
+            <h3>What is Subdomain Takeover?</h3>
+            <p>Subdomain takeover occurs when a subdomain points to a third-party service (like GitHub Pages, Heroku, etc.) that is no longer claimed. An attacker can register the service and control the subdomain, potentially leading to:</p>
+            <ul>
+                <li>Cookie hijacking and session theft</li>
+                <li>Phishing attacks using trusted domains</li>
+                <li>Malware distribution</li>
+                <li>SEO poisoning and reputation damage</li>
+                <li>Bypass of security controls</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <div class="footer-text">
+                <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px"> <span id="current-year"></span> Adriano Freitas
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (findings.length === 0) {
             results.innerHTML = `
                 <div class="no-results">
-                    <h3>✅ No secrets found</h3>
+                    <h3>No secrets found</h3>
                     <p>No sensitive data patterns were detected in the JavaScript code.</p>
                 </div>
             `;
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let html = `
             <div class="results-summary">
-                <h3>🔍 Found ${findings.length} potential secret(s)</h3>
+                <h3>Found ${findings.length} potential secret(s)</h3>
                 ${sourceUrl ? `<p><strong>Source:</strong> ${sourceUrl}</p>` : ''}
             </div>
         `;

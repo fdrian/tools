@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 $out.value = decodeURIComponent(text.replace(/\+/g, '%20'));
             } catch {
-                $out.value = '⚠️ Invalid percent-encoding';
+                $out.value = 'Invalid percent-encoding';
             }
         }
     }
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             $out.value = decodeURIComponent($in.value.replace(/\+/g, '%20'));
         } catch (err) {
-            $out.value = '⚠️ Invalid percent-encoding';
+            $out.value = 'Invalid percent-encoding';
         }
     });
 
