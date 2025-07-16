@@ -662,7 +662,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function isValidDomain(domain) {
-        const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-_]*\.([a-zA-Z]{2,}|xn--[a-zA-Z0-9]+)$/;
+        // Improved regex to handle multiple subdomains and proper hyphen validation
+        const domainRegex = /^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
         return domainRegex.test(domain);
     }
 
