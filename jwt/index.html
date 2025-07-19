@@ -77,6 +77,7 @@
                         <button class="tab-btn active" data-tab="header">Header</button>
                         <button class="tab-btn" data-tab="payload">Payload</button>
                         <button class="tab-btn" data-tab="signature">Signature</button>
+                        <button class="tab-btn" data-tab="modifier">JWT Modifier</button>
                     </div>
                     <div class="tab-content">
                         <div id="header-tab" class="tab-pane active">
@@ -91,6 +92,55 @@
                             <h3>Signature</h3>
                             <div id="signature-output" class="signature-output">
                                 <p>Decode a token to see signature information</p>
+                            </div>
+                        </div>
+                        <div id="modifier-tab" class="tab-pane">
+                            <h3>JWT Modifier</h3>
+                            <div class="modifier-section">
+                                <div class="modifier-warning">
+                                    <strong>⚠️ Security Notice:</strong> This tool is for educational and testing purposes only. Use only in controlled environments with proper authorization.
+                                </div>
+                                
+                                <div class="modifier-config">
+                                    <h4>🔑 Secret Key Configuration</h4>
+                                    <textarea id="modifier-secret" placeholder="Enter the secret key to sign the new token"></textarea>
+                                </div>
+
+                                <div class="modifier-payload">
+                                    <h4>Edit Payload</h4>
+                                    <textarea id="payload-editor" placeholder="Payload JSON will be populated when you decode a token..."></textarea>
+                                    <div class="live-toggle">
+                                        <input type="checkbox" id="live-preview" checked>
+                                        <label for="live-preview">Live Preview Mode</label>
+                                    </div>
+                                </div>
+
+                                <div class="modifier-actions">
+                                    <button id="generate-token-btn" class="action-btn">� Generate New Token</button>
+                                </div>
+
+                                <div id="modifier-result" class="modifier-result">
+                                    <!-- Generated token will appear here -->
+                                </div>
+
+                                <div class="modifier-guide">
+                                    <h4>How to Use</h4>
+                                    <div class="guide-step">
+                                        <strong>1.</strong> First decode a JWT token using the "Decode Token" button
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>2.</strong> Enter the secret key used to sign the original token
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>3.</strong> Modify the payload JSON as needed (e.g., change role, username, permissions)
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>4.</strong> Click "Generate New Token" to create a new signed JWT
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>5.</strong> Use the new token in your requests (Header: Authorization: Bearer TOKEN)
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

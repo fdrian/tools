@@ -673,6 +673,148 @@ footer a {
     background-color: var(--info-color);
 }
 
+/* JWT Modifier Styles */
+.modifier-section {
+    padding: 20px 0;
+}
+
+.modifier-warning {
+    background: rgba(254, 100, 11, 0.2);
+    border: 1px solid #fe640b;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #fe640b;
+    font-size: 14px;
+}
+
+.modifier-config,
+.modifier-payload {
+    margin-bottom: 25px;
+}
+
+.modifier-config h4,
+.modifier-payload h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+#modifier-secret,
+#payload-editor {
+    width: 100%;
+    min-height: 80px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: rgba(205, 214, 244, 0.05);
+    color: var(--text-color);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+#payload-editor {
+    min-height: 120px;
+}
+
+.modifier-actions {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.modifier-result {
+    margin: 25px 0;
+    min-height: 50px;
+}
+
+.token-result {
+    background: rgba(205, 214, 244, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.token-result h5 {
+    color: var(--primary-color);
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.token-result textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: rgba(17, 17, 27, 0.8);
+    color: var(--text-color);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.token-result .payload-info {
+    font-size: 12px;
+    color: rgba(205, 214, 244, 0.7);
+    margin-bottom: 8px;
+    word-break: break-all;
+}
+
+.modifier-guide {
+    background: rgba(205, 214, 244, 0.05);
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.modifier-guide h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.guide-step {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 2px solid var(--primary-color);
+    opacity: 0.9;
+}
+
+.success-message {
+    background: rgba(64, 160, 43, 0.2);
+    border: 1px solid var(--success-color);
+    border-radius: 4px;
+    padding: 15px;
+    margin: 15px 0;
+    color: var(--success-color);
+}
+
+.variations-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 15px;
+    background: rgba(17, 17, 27, 0.3);
+}
+
+.variation-item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(205, 214, 244, 0.2);
+}
+
+.variation-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     header {
@@ -710,6 +852,20 @@ footer a {
     .tab-btn.active {
         border-left: 2px solid var(--primary-color);
         border-bottom: 1px solid var(--border-color);
+    }
+    
+    .finding-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .findings-list {
+        margin-left: 0;
     }
 }
 
@@ -1255,4 +1411,47 @@ footer a {
         flex-direction: column;
         gap: 5px;
     }
+}
+
+/* Live Preview Styles */
+.live-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.live-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.live-toggle label {
+    cursor: pointer;
+    user-select: none;
+}
+
+.token-result.live-preview {
+    border-left: 3px solid var(--primary-color);
+    background: rgba(136, 38, 249, 0.05);
+}
+
+.live-indicator {
+    font-size: 12px;
+    color: var(--primary-color);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.token-result.error {
+    background: rgba(210, 15, 57, 0.1);
+    border-left: 3px solid var(--error-color);
+}
+
+.token-result.error p {
+    color: var(--error-color);
+    margin: 10px 0;
 }

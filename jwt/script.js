@@ -20,6 +20,13 @@ const currentYearElement = document.getElementById('current-year');
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabPanes = document.querySelectorAll('.tab-pane');
 
+// JWT Modifier elements
+const modifierSecret = document.getElementById('modifier-secret');
+const payloadEditor = document.getElementById('payload-editor');
+const generateTokenBtn = document.getElementById('generate-token-btn');
+const livePreviewCheckbox = document.getElementById('live-preview');
+const modifierResult = document.getElementById('modifier-result');
+
 // Set current year in footer
 currentYearElement.textContent = new Date().getFullYear();
 
@@ -156,6 +163,15 @@ function updateUI(decodedToken) {
     headerOutput.innerHTML = formatJSON(decodedToken.header);
     payloadOutput.innerHTML = formatJSON(decodedToken.payload);
 
+    // Update payload editor for JWT Modifier
+    if (payloadEditor) {
+        payloadEditor.value = JSON.stringify(decodedToken.payload, null, 2);
+        // Trigger live preview if enabled
+        if (livePreviewCheckbox && livePreviewCheckbox.checked) {
+            handleLivePreview();
+        }
+    }
+
     const alg = decodedToken.header.alg || 'none';
     signatureOutput.innerHTML = `
         <p><strong>Algorithm:</strong> ${alg}</p>
@@ -250,6 +266,142 @@ async function validateJWT(token, secret) {
     }
 }
 
+/**
+ * Base64url encode function
+ * @param {string} str - String to encode
+ * @returns {string} Base64url encoded string
+ */
+function base64UrlEncode(str) {
+    return btoa(str)
+        .replace(/=/g, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
+}
+
+/**
+ * Generate HMAC SHA256 signature
+ * @param {string} message - Message to sign
+ * @param {string} secret - Secret key
+ * @returns {Promise<string>} Base64url encoded signature
+ */
+async function generateHMACSignature(message, secret) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    const key = await crypto.subtle.importKey(
+        'raw',
+        encoder.encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' },
+        false,
+        ['sign']
+    );
+    const signature = await crypto.subtle.sign('HMAC', key, data);
+    const bytes = new Uint8Array(signature);
+    let binary = '';
+    bytes.forEach(byte => binary += String.fromCharCode(byte));
+    return base64UrlEncode(binary);
+}
+
+/**
+ * Generate a new JWT token with modified payload
+ * @param {Object} payload - Modified payload object
+ * @param {string} secret - Secret key for signing
+ * @returns {Promise<string>} New JWT token
+ */
+async function generateNewJWT(payload, secret) {
+    const header = {
+        "alg": "HS256",
+        "typ": "JWT"
+    };
+
+    const encodedHeader = base64UrlEncode(JSON.stringify(header));
+    const encodedPayload = base64UrlEncode(JSON.stringify(payload));
+    const message = encodedHeader + '.' + encodedPayload;
+    const signature = await generateHMACSignature(message, secret);
+    
+    return message + '.' + signature;
+}
+
+/**
+ * Display generated token result with live preview styling
+ * @param {string} token - Generated JWT token
+ * @param {Object} payload - Payload used for generation
+ * @param {boolean} isLivePreview - Whether this is a live preview update
+ */
+function displayTokenResult(token, payload, isLivePreview = false) {
+    const title = isLivePreview ? "🔄 Live Preview - Generated Token" : "🚀 Generated Token";
+    const resultHTML = `
+        <div class="token-result ${isLivePreview ? 'live-preview' : ''}">
+            <h5>${title}</h5>
+            <div class="payload-info">Payload: ${JSON.stringify(payload)}</div>
+            <textarea readonly id="generated-token-output">${token}</textarea>
+            ${isLivePreview ? '<div class="live-indicator">Updates automatically as you edit the payload</div>' : ''}
+        </div>
+    `;
+    modifierResult.innerHTML = resultHTML;
+}
+
+/**
+ * Generate token with live preview support
+ * @param {boolean} isLivePreview - Whether this is a live preview update
+ */
+async function generateToken(isLivePreview = false) {
+    const payloadText = payloadEditor.value.trim();
+    const secret = modifierSecret.value.trim();
+
+    if (!payloadText) {
+        if (!isLivePreview) {
+            showNotification('Please decode a token first to populate the payload editor', 'error');
+        }
+        return;
+    }
+
+    if (!secret) {
+        if (!isLivePreview) {
+            showNotification('Please enter a secret key to sign the token', 'error');
+        } else {
+            modifierResult.innerHTML = '<div class="token-result"><p>⚠️ Enter a secret key to see the generated token</p></div>';
+        }
+        return;
+    }
+
+    try {
+        const payload = JSON.parse(payloadText);
+        const newToken = await generateNewJWT(payload, secret);
+        displayTokenResult(newToken, payload, isLivePreview);
+        
+        if (!isLivePreview) {
+            showNotification('Token generated successfully!', 'success');
+        }
+    } catch (error) {
+        if (!isLivePreview) {
+            showNotification('Error generating token: ' + error.message, 'error');
+        } else {
+            modifierResult.innerHTML = `<div class="token-result error"><p>⚠️ Invalid JSON in payload</p></div>`;
+        }
+    }
+}
+
+/**
+ * Handle live preview updates with debouncing
+ */
+let livePreviewTimeout;
+function handleLivePreview() {
+    if (!livePreviewCheckbox.checked) return;
+    
+    clearTimeout(livePreviewTimeout);
+    livePreviewTimeout = setTimeout(() => {
+        generateToken(true);
+    }, 300); // 300ms debounce
+}
+
+/**
+ * Clear modifier results
+ */
+function clearModifierResults() {
+    if (modifierResult) {
+        modifierResult.innerHTML = '';
+    }
+}
 
 // Event Listeners
 decodeBtn.addEventListener('click', () => {
@@ -287,9 +439,40 @@ clearBtn.addEventListener('click', () => {
     tokenStatus.textContent = '';
     tokenExpiry.textContent = '';
     secretKeySection.style.display = 'none';
+    
+    // Clear JWT Modifier fields
+    if (modifierSecret) modifierSecret.value = '';
+    if (payloadEditor) payloadEditor.value = '';
+    clearModifierResults();
+    
     jwtInput.focus();
     showNotification('Fields cleared');
 });
+
+// JWT Modifier Event Listeners
+if (generateTokenBtn) {
+    generateTokenBtn.addEventListener('click', async () => {
+        await generateToken(false);
+    });
+}
+
+// Live Preview Event Listeners
+if (payloadEditor && livePreviewCheckbox) {
+    payloadEditor.addEventListener('input', handleLivePreview);
+    modifierSecret.addEventListener('input', handleLivePreview);
+    
+    livePreviewCheckbox.addEventListener('change', () => {
+        if (livePreviewCheckbox.checked) {
+            handleLivePreview();
+        } else {
+            // Clear live preview indicator if disabled
+            const existingResult = modifierResult.querySelector('.token-result');
+            if (existingResult && existingResult.classList.contains('live-preview')) {
+                modifierResult.innerHTML = '';
+            }
+        }
+    });
+}
 
 // Tab functionality
 tabButtons.forEach(button => {
