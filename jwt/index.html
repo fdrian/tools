@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JWT Debugger - Ferramenta online gratuita para validar e decodificar tokens JWT" />
-    <meta name="keywords" content="jwt, json web token, validator, validador, decoder, decodificador, ferramenta, online, gratuito" />
+    <meta name="description"
+        content="JWT Debugger - Ferramenta online gratuita para validar e decodificar tokens JWT" />
+    <meta name="keywords"
+        content="jwt, json web token, validator, validador, decoder, decodificador, ferramenta, online, gratuito" />
     <meta name="author" content="Adriano Freitas" />
     <title>JWT Debugger - Drian</title>
 
@@ -33,6 +36,7 @@
     <link rel="stylesheet" href="../../../src/css/index.css">
     <link rel="stylesheet" href="../../src/css/style.css">
 </head>
+
 <body>
     <div class="tool-container">
         <header>
@@ -44,39 +48,42 @@
             <h1>JWT Debugger</h1>
             <nav>
                 <ul>
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="../../index.html">Tools</a></li>   
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html">Tools</a></li>
                 </ul>
             </nav>
         </header>
 
         <main>
             <div class="tool-description">
-                <p>This tool allows you to decode and validate JWTs (JSON Web Tokens). Paste your JWT to view its contents and verify its validity.</p>
+                <p>This tool allows you to decode and validate JWTs (JSON Web Tokens). Paste your JWT to view its
+                    contents and verify its validity.</p>
             </div>
-        
+
             <div class="tool-panel">
                 <div class="input-section">
                     <h2>JWT Token</h2>
                     <textarea id="jwt-input" placeholder="Paste your JWT here (format: xxxxx.yyyyy.zzzzz)"></textarea>
                 </div>
-        
+
                 <div class="actions">
                     <button id="decode-btn" class="action-btn">Decode Token</button>
                     <button id="validate-btn" class="action-btn">Validate Signature</button>
                     <button id="clear-btn" class="action-btn secondary">Clear</button>
                 </div>
-        
+
                 <div class="secret-key-section" id="secret-key-section" style="display: none;">
                     <h2>Secret Key (for validation)</h2>
-                    <textarea id="secret-key" placeholder="Paste the secret key to validate the token's signature"></textarea>
+                    <textarea id="secret-key"
+                        placeholder="Paste the secret key to validate the token's signature"></textarea>
                 </div>
-        
+
                 <div class="output-section">
                     <div class="output-tabs">
                         <button class="tab-btn active" data-tab="header">Header</button>
                         <button class="tab-btn" data-tab="payload">Payload</button>
                         <button class="tab-btn" data-tab="signature">Signature</button>
+                        <button class="tab-btn" data-tab="modifier">JWT Modifier</button>
                     </div>
                     <div class="tab-content">
                         <div id="header-tab" class="tab-pane active">
@@ -93,10 +100,64 @@
                                 <p>Decode a token to see signature information</p>
                             </div>
                         </div>
+                        <div id="modifier-tab" class="tab-pane">
+                            <h3>JWT Modifier</h3>
+                            <div class="modifier-section">
+                                <div class="modifier-warning">
+                                    <strong>⚠️ Security Notice:</strong> This tool is for educational and testing
+                                    purposes only. Use only in controlled environments with proper authorization.
+                                </div>
+
+                                <div class="modifier-config">
+                                    <h4>🔑 Secret Key Configuration</h4>
+                                    <textarea id="modifier-secret"
+                                        placeholder="Enter the secret key to sign the new token"></textarea>
+                                </div>
+
+                                <div class="modifier-payload">
+                                    <h4>Edit Payload</h4>
+                                    <textarea id="payload-editor"
+                                        placeholder="Payload JSON will be populated when you decode a token..."></textarea>
+                                    <div class="live-toggle">
+                                        <input type="checkbox" id="live-preview" checked>
+                                        <label for="live-preview">Live Preview Mode</label>
+                                    </div>
+                                </div>
+
+                                <div class="modifier-actions">
+                                    <button id="generate-token-btn" class="action-btn">� Generate New Token</button>
+                                </div>
+
+                                <div id="modifier-result" class="modifier-result">
+                                    <!-- Generated token will appear here -->
+                                </div>
+
+                                <div class="modifier-guide">
+                                    <h4>How to Use</h4>
+                                    <div class="guide-step">
+                                        <strong>1.</strong> First decode a JWT token using the "Decode Token" button
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>2.</strong> Enter the secret key used to sign the original token
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>3.</strong> Modify the payload JSON as needed (e.g., change role,
+                                        username, permissions)
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>4.</strong> Click "Generate New Token" to create a new signed JWT
+                                    </div>
+                                    <div class="guide-step">
+                                        <strong>5.</strong> Use the new token in your requests (Header: Authorization:
+                                        Bearer TOKEN)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        
+
             <div class="token-info">
                 <div class="token-status" id="token-status">
                     <!-- Token status will be displayed here -->
@@ -105,35 +166,42 @@
                     <!-- Expiration info will be displayed here -->
                 </div>
             </div>
-        
+
             <div class="tool-info">
                 <h3>About JWT (JSON Web Tokens)</h3>
-                <p>JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed.</p>
+                <p>JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely
+                    transmitting information between parties as a JSON object. This information can be verified and
+                    trusted because it is digitally signed.</p>
                 <p>A JWT consists of three parts separated by dots:</p>
                 <ul>
                     <li><strong>Header</strong>: Contains the type of the token and the signing algorithm used</li>
-                    <li><strong>Payload</strong>: Contains the claims, which are statements about an entity (typically the user) and additional data</li>
-                    <li><strong>Signature</strong>: Verifies that the sender of the JWT is who it claims to be and ensures that the message wasn't altered</li>
+                    <li><strong>Payload</strong>: Contains the claims, which are statements about an entity (typically
+                        the user) and additional data</li>
+                    <li><strong>Signature</strong>: Verifies that the sender of the JWT is who it claims to be and
+                        ensures that the message wasn't altered</li>
                 </ul>
                 <p>JWTs are commonly used for:</p>
                 <ul>
                     <li>Authentication: When a user logs in, every subsequent request will include the JWT</li>
                     <li>Information exchange: JWTs are a good way to securely transmit information between parties</li>
-                    <li>Authorization: Once the user is logged in, the JWT allows access to routes, services, and resources permitted with that token</li>
+                    <li>Authorization: Once the user is logged in, the JWT allows access to routes, services, and
+                        resources permitted with that token</li>
                 </ul>
             </div>
         </main>
-        
-        <footer>      
+
+        <footer>
             <div class="footer">
-            <div class="footer-text">
-                <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px"> <span id="current-year"></span> Adriano Freitas
+                <div class="footer-text">
+                    <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images"
+                        height="14px"> <span id="current-year"></span> Adriano Freitas
+                </div>
             </div>
-            </div>
-        </div>
-        </footer>
+    </div>
+    </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

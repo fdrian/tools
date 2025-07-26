@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JavaScript Secrets Finder - Find API keys, tokens and sensitive data in JavaScript files">
+    <meta name="description"
+        content="JavaScript Secrets Finder - Find API keys, tokens and sensitive data in JavaScript files">
     <meta name="keywords" content="javascript, secrets, api keys, tokens, security, bug bounty, pentest">
     <meta name="author" content="Adriano Freitas">
     <title>JavaScript Secrets Finder - Drian</title>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tools.adrianofreitas.me/js-secrets/">
+    <meta property="og:url" content="https://tools.fdrian.me/js-secrets/">
     <meta property="og:title" content="JavaScript Secrets Finder - Adriano Freitas">
     <meta property="og:description" content="Find API keys, tokens and sensitive data in JavaScript files">
-    <meta property="og:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+    <meta property="og:image" content="https://fdrian.me/src/images/thumbnail.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://tools.adrianofreitas.me/js-secrets/">
+    <meta property="twitter:url" content="https://tools.fdrian.me/js-secrets/">
     <meta property="twitter:title" content="JavaScript Secrets Finder - Adriano Freitas">
     <meta property="twitter:description" content="Find API keys, tokens and sensitive data in JavaScript files">
-    <meta property="twitter:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+    <meta property="twitter:image" content="https://fdrian.me/src/images/thumbnail.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../../src/images/favicon/favicon.ico">
@@ -33,108 +35,113 @@
     <link rel="stylesheet" href="../../src/css/index.css">
     <link rel="stylesheet" href="../../src/css/style.css">
 </head>
+
 <body>
-<div class="tool-container">
-    <header>
-        <div class="logo">
-            <a href="../../index.html">
-                <img src="../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
-            </a>
-        </div>
-        <h1>JavaScript Secrets Finder</h1>
-        <nav>
-            <ul>
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="../../index.html">Tools</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="tool-container">
+        <header>
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
+                </a>
+            </div>
+            <h1>JavaScript Secrets Finder</h1>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html">Tools</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <main>
-        <div class="tool-description">
-            <p>This tool scans JavaScript code for <strong>API keys, tokens, secrets, and sensitive data</strong>. Perfect for bug bounty reconnaissance and security testing. Paste JS code or enter a URL to fetch and analyze.</p>
-        </div>
-
-        <div class="tool-panel">
-            <div class="input-section">
-                <div class="input-tabs">
-                    <button id="code-tab" class="tab-btn active">JavaScript Code</button>
-                    <button id="url-tab" class="tab-btn">Fetch from URL</button>
-                </div>
-                
-                <div id="code-input" class="input-container active">
-                    <h2>Paste JavaScript Code</h2>
-                    <textarea id="js-code" placeholder="Paste JavaScript code here..."></textarea>
-                </div>
-                
-                <div id="url-input" class="input-container">
-                    <h2>JavaScript File URL</h2>
-                    <input type="url" id="js-url" placeholder="https://example.com/script.js">
-                    <button id="fetch-btn" class="action-btn">Fetch & Analyze</button>
-                </div>
+        <main>
+            <div class="tool-description">
+                <p>This tool scans JavaScript code for <strong>API keys, tokens, secrets, and sensitive data</strong>.
+                    Perfect for bug bounty reconnaissance and security testing. Paste JS code or enter a URL to fetch
+                    and analyze.</p>
             </div>
 
-            <div class="actions">
-                <button id="scan-btn" class="action-btn">Scan for Secrets</button>
-                <button id="clear-btn" class="action-btn secondary">Clear</button>
-                <button id="copy-btn" class="action-btn secondary">Copy Results</button>
-            </div>
-
-            <div class="output-section">
-                <h2>Results</h2>
-                <div id="results-container">
-                    <div id="loading" class="hidden">
-                        <div class="spinner"></div>
-                        <p>Analyzing JavaScript code...</p>
+            <div class="tool-panel">
+                <div class="input-section">
+                    <div class="input-tabs">
+                        <button id="code-tab" class="tab-btn active">JavaScript Code</button>
+                        <button id="url-tab" class="tab-btn">Fetch from URL</button>
                     </div>
-                    <div id="results" class="results-content">
-                        <p class="placeholder">Results will appear here after scanning...</p>
+
+                    <div id="code-input" class="input-container active">
+                        <h2>Paste JavaScript Code</h2>
+                        <textarea id="js-code" placeholder="Paste JavaScript code here..."></textarea>
+                    </div>
+
+                    <div id="url-input" class="input-container">
+                        <h2>JavaScript File URL</h2>
+                        <input type="url" id="js-url" placeholder="https://example.com/script.js">
+                        <button id="fetch-btn" class="action-btn">Fetch & Analyze</button>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="tool-info">
-            <h3>What this tool finds:</h3>
-            <div class="info-grid">
-                <div class="info-item">
-                    <h4>API Keys</h4>
-                    <p>AWS, Google, Stripe, GitHub, and 20+ other services</p>
+                <div class="actions">
+                    <button id="scan-btn" class="action-btn">Scan for Secrets</button>
+                    <button id="clear-btn" class="action-btn secondary">Clear</button>
+                    <button id="copy-btn" class="action-btn secondary">Copy Results</button>
                 </div>
-                <div class="info-item">
-                    <h4>Tokens</h4>
-                    <p>JWT, OAuth, Bearer tokens, and authentication secrets</p>
-                </div>
-                <div class="info-item">
-                    <h4>Credentials</h4>
-                    <p>Passwords, database connections, and hardcoded secrets</p>
-                </div>
-                <div class="info-item">
-                    <h4>URLs & Endpoints</h4>
-                    <p>Internal APIs, admin panels, and sensitive endpoints</p>
+
+                <div class="output-section">
+                    <h2>Results</h2>
+                    <div id="results-container">
+                        <div id="loading" class="hidden">
+                            <div class="spinner"></div>
+                            <p>Analyzing JavaScript code...</p>
+                        </div>
+                        <div id="results" class="results-content">
+                            <p class="placeholder">Results will appear here after scanning...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <h3>Perfect for:</h3>
-            <ul>
-                <li>Bug bounty reconnaissance and enumeration</li>
-                <li>Security audits and penetration testing</li>
-                <li>Code review and vulnerability assessment</li>
-                <li>Finding exposed secrets in client-side code</li>
-                <li>Analyzing third-party JavaScript libraries</li>
-            </ul>
-        </div>
-    </main>
 
-    <footer>
-        <div class="footer">
-            <div class="footer-text">
-                <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px"> <span id="current-year"></span> Adriano Freitas
+            <div class="tool-info">
+                <h3>What this tool finds:</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>API Keys</h4>
+                        <p>AWS, Google, Stripe, GitHub, and 20+ other services</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Tokens</h4>
+                        <p>JWT, OAuth, Bearer tokens, and authentication secrets</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Credentials</h4>
+                        <p>Passwords, database connections, and hardcoded secrets</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>URLs & Endpoints</h4>
+                        <p>Internal APIs, admin panels, and sensitive endpoints</p>
+                    </div>
+                </div>
+
+                <h3>Perfect for:</h3>
+                <ul>
+                    <li>Bug bounty reconnaissance and enumeration</li>
+                    <li>Security audits and penetration testing</li>
+                    <li>Code review and vulnerability assessment</li>
+                    <li>Finding exposed secrets in client-side code</li>
+                    <li>Analyzing third-party JavaScript libraries</li>
+                </ul>
             </div>
-        </div>
-    </footer>
-</div>
+        </main>
 
-<script src="script.js"></script>
+        <footer>
+            <div class="footer">
+                <div class="footer-text">
+                    <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images"
+                        height="14px"> <span id="current-year"></span> Adriano Freitas
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
