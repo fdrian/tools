@@ -318,11 +318,16 @@ header {
 .logo img {
     height: 40px;
     opacity: 0.8;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+    padding: 4px;
 }
 
 .logo img:hover {
     opacity: 1;
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 0 4px 16px rgba(136, 38, 249, 0.3);
+    background-color: rgba(136, 38, 249, 0.1);
 }
 
 header h1 {
@@ -349,12 +354,35 @@ nav a {
     color: var(--text-color);
     text-decoration: none;
     opacity: 0.8;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px 16px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-color), #9d5afa);
+    opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 nav a:hover {
     opacity: 1;
-    color: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(136, 38, 249, 0.3);
+}
+
+nav a:hover::before {
+    opacity: 1;
 }
 
 main {
@@ -552,25 +580,122 @@ textarea:focus {
 .action-btn {
     padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: var(--primary-color);
     color: white;
     font-family: 'Share Tech Mono', monospace;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(136, 38, 249, 0.3);
+    transform: translateY(0);
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
 .action-btn:hover {
     background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(136, 38, 249, 0.4);
+}
+
+.action-btn:hover::before {
+    left: 100%;
+}
+
+.action-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(136, 38, 249, 0.4);
 }
 
 .action-btn.secondary {
     background-color: var(--button-secondary);
+    box-shadow: 0 4px 12px rgba(24, 24, 37, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .action-btn.secondary:hover {
     background-color: var(--button-secondary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(24, 24, 37, 0.5);
+    border-color: var(--primary-color);
+}
+
+.action-btn:disabled,
+.action-btn.disabled {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.5;
+}
+
+.action-btn:disabled:hover,
+.action-btn.disabled:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: none;
+    box-shadow: none;
+}
+
+.action-btn:disabled::before,
+.action-btn.disabled::before {
+    display: none;
+}
+
+/* Button variants */
+.action-btn.success {
+    background-color: var(--success-color);
+    box-shadow: 0 4px 12px rgba(64, 160, 43, 0.3);
+}
+
+.action-btn.success:hover {
+    background-color: #2f7d20;
+    box-shadow: 0 8px 20px rgba(64, 160, 43, 0.4);
+}
+
+.action-btn.danger {
+    background-color: var(--error-color);
+    box-shadow: 0 4px 12px rgba(210, 15, 57, 0.3);
+}
+
+.action-btn.danger:hover {
+    background-color: #a00d2e;
+    box-shadow: 0 8px 20px rgba(210, 15, 57, 0.4);
+}
+
+.action-btn.warning {
+    background-color: var(--warning-color);
+    box-shadow: 0 4px 12px rgba(254, 100, 11, 0.3);
+}
+
+.action-btn.warning:hover {
+    background-color: #d14309;
+    box-shadow: 0 8px 20px rgba(254, 100, 11, 0.4);
+}
+
+.action-btn.outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: none;
+}
+
+.action-btn.outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 8px 20px rgba(136, 38, 249, 0.4);
 }
 
 /* Tabs */
@@ -581,7 +706,7 @@ textarea:focus {
 }
 
 .tab-btn {
-    padding: 10px 20px;
+    padding: 12px 24px;
     background: none;
     border: none;
     color: var(--text-color);
@@ -589,11 +714,33 @@ textarea:focus {
     font-family: 'Share Tech Mono', monospace;
     font-size: 16px;
     opacity: 0.7;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-bottom: 2px solid transparent;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    margin-right: 4px;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(136, 38, 249, 0.1), rgba(157, 90, 250, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 6px 6px 0 0;
 }
 
 .tab-btn:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    background-color: rgba(136, 38, 249, 0.1);
+}
+
+.tab-btn:hover::before {
     opacity: 1;
 }
 
@@ -601,6 +748,12 @@ textarea:focus {
     opacity: 1;
     border-bottom: 2px solid var(--primary-color);
     color: var(--primary-color);
+    background-color: rgba(136, 38, 249, 0.15);
+    box-shadow: 0 -2px 8px rgba(136, 38, 249, 0.2);
+}
+
+.tab-btn.active::before {
+    opacity: 0;
 }
 
 .tab-pane {
@@ -973,6 +1126,22 @@ footer a {
 
     .action-btn {
         width: 100%;
+        padding: 14px 20px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .tab-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .tab-btn:hover {
+        transform: none;
     }
 
     .output-tabs {
