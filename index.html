@@ -35,11 +35,23 @@
       <div id="tools">
 
         <div class="tools-header">
-          <span class="header-caption">Simple tools for <span class="color">web security & testing</span></span> <br>
+          <span class="header-caption">Simple tools for <span class="color">web security & testing</span></span>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+          <div class="search-container">
+            <input type="text" id="tool-search" placeholder="Search tools..." autocomplete="off">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+          <div class="search-results-count" id="search-count"></div>
         </div>
 
         <div id="tools-content">
-          <div class="tools-grid">
+          <div class="tools-grid" id="tools-grid">
 
             <div class="tool-card">
               <div class="tool-info">
@@ -49,7 +61,7 @@
                 <p>Tool for encoding and decoding strings in Base64. Useful for working with binary data in text format.
                 </p>
               </div>
-            </div><br>
+            </div>
 
             <div class="tool-card">
               <div class="tool-info">
@@ -59,7 +71,7 @@
                 <p>Tool for validating and decoding JWT (JSON Web Tokens). View token contents and check their validity.
                 </p>
               </div>
-            </div><br>
+            </div>
 
             <div class="tool-card">
               <div class="tool-info">
@@ -69,7 +81,7 @@
                 <p>This tool allows you to encode or decode text using <strong>percent-encoding</strong> (URL encoding).
                   Useful for debugging HTTP requests, query parameters, and payloads with special characters.</p>
               </div>
-            </div><br>
+            </div>
 
             <div class="tool-card">
               <div class="tool-info">
@@ -79,7 +91,8 @@
                 <p>Enter a URL with a redirection parameter (e.g. <code>?url=</code>, <code>?next=</code>) and we will
                   test it against common open redirect payloads.</p>
               </div>
-            </div><br>
+            </div>
+
             <div class="tool-card">
               <div class="tool-info">
                 <a href="domain/extractor/index.html">
@@ -88,7 +101,7 @@
                 <p>This tool extracts domains from raw text or a full webpage. You can paste any text or enter a URL,
                   and we'll extract all valid domains.</p>
               </div>
-            </div><br>
+            </div>
 
             <div class="tool-card">
               <div class="tool-info">
@@ -98,7 +111,7 @@
                 <p>Find API keys, tokens, and sensitive data in JavaScript code. Perfect for bug bounty reconnaissance
                   and security audits.</p>
               </div>
-            </div><br>
+            </div>
 
             <div class="tool-card">
               <div class="tool-info">
@@ -108,7 +121,7 @@
                 <p>Analyze HTTP security headers to identify vulnerabilities and misconfigurations. Essential for web
                   security audits.</p>
               </div>
-            </div><br>
+            </div>
 
             <div class="tool-card">
               <div class="tool-info">
@@ -118,7 +131,7 @@
                 <p>Detect subdomains vulnerable to takeover attacks. Check for unclaimed services and DNS
                   misconfigurations.</p>
               </div>
-            </div><br>
+            </div>
           </div>
         </div>
     </main>
@@ -267,6 +280,83 @@
       } else {
         console.error('particlesJS is not defined');
       }
+    });
+  </script>
+
+  <!-- Search Functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const searchInput = document.getElementById('tool-search');
+      const searchCount = document.getElementById('search-count');
+      const toolsGrid = document.getElementById('tools-grid');
+      const toolCards = document.querySelectorAll('.tool-card');
+
+      // Create no results message
+      const noResultsDiv = document.createElement('div');
+      noResultsDiv.className = 'no-results';
+      noResultsDiv.innerHTML = `
+        <div class="icon">🔍</div>
+        <h3>No tools found</h3>
+        <p>Try adjusting your search terms or browse all available tools.</p>
+      `;
+      toolsGrid.parentNode.appendChild(noResultsDiv);
+
+      function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        toolCards.forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const description = card.querySelector('p').textContent.toLowerCase();
+
+          const matches = title.includes(searchTerm) || description.includes(searchTerm);
+
+          if (matches) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        // Update search count
+        if (searchTerm) {
+          searchCount.textContent = `${visibleCount} tool${visibleCount !== 1 ? 's' : ''} found`;
+          searchCount.classList.add('visible');
+        } else {
+          searchCount.classList.remove('visible');
+        }
+
+        // Show/hide no results message
+        if (visibleCount === 0 && searchTerm) {
+          noResultsDiv.classList.add('visible');
+          toolsGrid.style.display = 'none';
+        } else {
+          noResultsDiv.classList.remove('visible');
+          toolsGrid.style.display = 'grid';
+        }
+      }
+
+      // Add search event listeners
+      searchInput.addEventListener('input', performSearch);
+      searchInput.addEventListener('keyup', performSearch);
+
+      // Clear search on escape
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          searchInput.value = '';
+          performSearch();
+          searchInput.blur();
+        }
+      });
+
+      // Focus search with Ctrl+K or Cmd+K
+      document.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
     });
   </script>
 </body>
