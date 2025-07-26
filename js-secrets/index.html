@@ -37,6 +37,8 @@
 </head>
 
 <body>
+    <div id="particles"></div>
+
     <div class="tool-container">
         <header>
             <div class="logo">
@@ -141,6 +143,128 @@
         </footer>
     </div>
 
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+    
+    <!-- Add particles.js -->
+    <script src="../../src/js/particles.js"></script>
+    
+    <!-- Particles initialization -->
+    <script>
+        window.addEventListener('load', function () {
+            if (typeof particlesJS !== 'undefined') {
+                setTimeout(function () {
+                    particlesJS("particles", {
+                        "particles": {
+                            "number": {
+                                "value": 80,
+                                "density": {
+                                    "enable": true,
+                                    "value_area": 1200
+                                }
+                            },
+                            "color": {
+                                "value": ["#8a4ff9", "#9d5afa", "#6b3cd4", "#b470fb", "#7c3ff5", "#a055ff"]
+                            },
+                            "shape": {
+                                "type": ["circle", "triangle", "edge"],
+                                "stroke": {
+                                    "width": 1.0,
+                                    "color": "#8a4ff9"
+                                },
+                                "polygon": {
+                                    "nb_sides": 3
+                                }
+                            },
+                            "opacity": {
+                                "value": 0.8,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 1.5,
+                                    "opacity_min": 0.05,
+                                    "sync": false
+                                }
+                            },
+                            "size": {
+                                "value": 3,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 2.5,
+                                    "size_min": 0.2,
+                                    "sync": false
+                                }
+                            },
+                            "line_linked": {
+                                "enable": true,
+                                "distance": 100,
+                                "color": "#b4befe",
+                                "opacity": 0.4,
+                                "width": 1.0
+                            },
+                            "move": {
+                                "enable": true,
+                                "speed": 2.5,
+                                "direction": "none",
+                                "random": true,
+                                "straight": false,
+                                "out_mode": "bounce",
+                                "bounce": true,
+                                "attract": {
+                                    "enable": true,
+                                    "rotateX": 1000,
+                                    "rotateY": 1000
+                                }
+                            }
+                        },
+                        "interactivity": {
+                            "detect_on": "canvas",
+                            "events": {
+                                "onhover": {
+                                    "enable": true,
+                                    "mode": ["grab", "bubble"]
+                                },
+                                "onclick": {
+                                    "enable": true,
+                                    "mode": "repulse"
+                                },
+                                "resize": true
+                            },
+                            "modes": {
+                                "grab": {
+                                    "distance": 180,
+                                    "line_linked": {
+                                        "opacity": 0.9
+                                    }
+                                },
+                                "bubble": {
+                                    "distance": 250,
+                                    "size": 16,
+                                    "duration": 1.5,
+                                    "opacity": 1,
+                                    "speed": 4
+                                },
+                                "repulse": {
+                                    "distance": 180,
+                                    "duration": 0.8
+                                },
+                                "push": {
+                                    "particles_nb": 8
+                                },
+                                "remove": {
+                                    "particles_nb": 4
+                                }
+                            }
+                        },
+                        "retina_detect": true
+                    });
+                }, 100);
+            }
+        });
+    </script>
+    
     <script src="script.js"></script>
 </body>
 
