@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
+
+<h<body>
+    <div id="particles"></div>
+
+    <div class="tool-container">d>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Domain Extractor - Ferramenta online para extrair domínios de qualquer texto ou página web." />
+  <meta name="description"
+    content="Domain Extractor - Ferramenta online para extrair domínios de qualquer texto ou página web." />
   <meta name="keywords" content="domain, extractor, extrair domínios, bug bounty, recon, ferramenta, online" />
-  <meta name="author" content="Adriano Freitas" />
+  <meta name="author" content="Drian" />
   <title>Domain Extractor - Drian</title>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tools.adrianofreitas.me/domain/">
-  <meta property="og:title" content="Domain Extractor - Adriano Freitas">
+  <meta property="og:url" content="https://tools.fdrian.me/domain/">
+  <meta property="og:title" content="Domain Extractor - Drian">
   <meta property="og:description" content="Ferramenta online para extrair domínios de qualquer texto ou página web.">
-  <meta property="og:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+  <meta property="og:image" content="https://fdrian.me/src/images/thumbnail.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://tools.adrianofreitas.me/domain/">
-  <meta property="twitter:title" content="Domain Extractor - Adriano Freitas">
-  <meta property="twitter:description" content="Ferramenta online para extrair domínios de qualquer texto ou página web.">
-  <meta property="twitter:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+  <meta property="twitter:url" content="https://tools.fdrian.me/domain/">
+  <meta property="twitter:title" content="Domain Extractor - Drian">
+  <meta property="twitter:description"
+    content="Ferramenta online para extrair domínios de qualquer texto ou página web.">
+  <meta property="twitter:image" content="https://fdrian.me/src/images/thumbnail.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="../../src/images/favicon/favicon.ico">
@@ -33,26 +39,28 @@
   <link rel="stylesheet" href="../../../../src/css/index.css">
   <link rel="stylesheet" href="../../../src/css/style.css">
 </head>
+
 <body>
   <div class="tool-container">
     <header>
       <div class="logo">
         <a href="../../index.html">
-          <img src="../../../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
+          <img src="../../../../src/images/logo.png" alt="Logo Drian" height="16">
         </a>
       </div>
-      <h1>Domain Extractor</h1>      
+      <h1>Domain Extractor</h1>
       <nav>
         <ul>
           <li><a href="../../index.html">Home</a></li>
-          <li><a href="../../index.html">Tools</a></li>      
+          <li><a href="../../index.html">Tools</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
       <div class="tool-description">
-        <p>This tool extracts domains from raw text or a full webpage. You can paste any text or enter a URL, and we'll extract all valid domains.</p>
+        <p>This tool extracts domains from raw text or a full webpage. You can paste any text or enter a URL, and we'll
+          extract all valid domains.</p>
       </div>
 
       <div class="tool-panel">
@@ -75,7 +83,8 @@
 
       <div class="tool-info">
         <h3>About Domain Extraction</h3>
-        <p>Very useful for bug bounty recon, OSINT, and cleaning data. It removes duplicates automatically and extracts domains like:</p>
+        <p>Very useful for bug bounty recon, OSINT, and cleaning data. It removes duplicates automatically and extracts
+          domains like:</p>
         <ul>
           <li><code>example.com</code></li>
           <li><code>subdomain.example.com</code></li>
@@ -87,8 +96,9 @@
     <footer>
       <div class="footer">
         <div class="footer-text">
-          <img src="../../../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px">
-          <span id="current-year"></span> Adriano Freitas
+          <img src="../../../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images"
+            height="14px">
+          <span id="current-year"></span> Drian
         </div>
       </div>
     </footer>
@@ -97,6 +107,129 @@
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
   </script>
+  <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+  </script>
+  
+  <!-- Add particles.js -->
+  <script src="../../../src/js/particles.js"></script>
+  
+  <!-- Particles initialization -->
+  <script>
+    window.addEventListener('load', function () {
+      if (typeof particlesJS !== 'undefined') {
+        setTimeout(function () {
+          particlesJS("particles", {
+            "particles": {
+              "number": {
+                "value": 80,
+                "density": {
+                  "enable": true,
+                  "value_area": 1200
+                }
+              },
+              "color": {
+                "value": ["#8a4ff9", "#9d5afa", "#6b3cd4", "#b470fb", "#7c3ff5", "#a055ff"]
+              },
+              "shape": {
+                "type": ["circle", "triangle", "edge"],
+                "stroke": {
+                  "width": 1.0,
+                  "color": "#8a4ff9"
+                },
+                "polygon": {
+                  "nb_sides": 3
+                }
+              },
+              "opacity": {
+                "value": 0.8,
+                "random": true,
+                "anim": {
+                  "enable": true,
+                  "speed": 1.5,
+                  "opacity_min": 0.05,
+                  "sync": false
+                }
+              },
+              "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                  "enable": true,
+                  "speed": 2.5,
+                  "size_min": 0.2,
+                  "sync": false
+                }
+              },
+              "line_linked": {
+                "enable": true,
+                "distance": 100,
+                "color": "#b4befe",
+                "opacity": 0.4,
+                "width": 1.0
+              },
+              "move": {
+                "enable": true,
+                "speed": 2.5,
+                "direction": "none",
+                "random": true,
+                "straight": false,
+                "out_mode": "bounce",
+                "bounce": true,
+                "attract": {
+                  "enable": true,
+                  "rotateX": 1000,
+                  "rotateY": 1000
+                }
+              }
+            },
+            "interactivity": {
+              "detect_on": "canvas",
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": ["grab", "bubble"]
+                },
+                "onclick": {
+                  "enable": true,
+                  "mode": "repulse"
+                },
+                "resize": true
+              },
+              "modes": {
+                "grab": {
+                  "distance": 180,
+                  "line_linked": {
+                    "opacity": 0.9
+                  }
+                },
+                "bubble": {
+                  "distance": 250,
+                  "size": 16,
+                  "duration": 1.5,
+                  "opacity": 1,
+                  "speed": 4
+                },
+                "repulse": {
+                  "distance": 180,
+                  "duration": 0.8
+                },
+                "push": {
+                  "particles_nb": 8
+                },
+                "remove": {
+                  "particles_nb": 4
+                }
+              }
+            },
+            "retina_detect": true
+          });
+        }, 100);
+      }
+    });
+  </script>
+  
   <script src="script.js"></script>
 </body>
+
 </html>

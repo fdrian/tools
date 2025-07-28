@@ -1,129 +1,383 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Simple tools for web security & testing." />
-  <meta name="author" content="Adriano Freitas" />
+  <meta name="author" content="Drian" />
   <title>Drian Tools</title>
-  
+
   <link rel="stylesheet" href="./src/css/style.css">
-  
+
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KLRV6JGEJB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KLRV6JGEJB');
+</script>
+
 <body>
-    
+  <div id="particles"></div>
+
   <div class="tool-container">
     <header>
       <div class="logo">
-        <a href="https://adrianofreitas.me" target="_blank" rel="noopener noreferrer">
-          <img src="./src/images/logo.png" alt="Logo Adriano Freitas" height="16">
+        <a href="https://fdrian.me" target="_blank" rel="noopener noreferrer">
+          <img src="./src/images/logo.png" alt="Logo Drian" height="16">
         </a>
       </div>
-      <h1>Drian Tools</h1>
+      <h1>TOOLS</h1>
       <nav>
         <ul>
-          <li><a href="https://adrianofreitas.me" target="_blank" rel="noopener noreferrer">Drian</a></li>
-          <li><a href="index.html">Tools</a></li>                
+          <li><a href="https://fdrian.me" target="_blank" rel="noopener noreferrer">Drian</a></li>
+          <li><a href="index.html">Tools</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-        <div id="tools">
+      <div id="tools">
 
-          <div class="tools-header">
-            <span class="header-caption">Simple tools for <span class="color">web security & testing</span></span> <br>
+        <div class="tools-header">
+          <span class="header-caption">Simple tools for <span class="color">web security & testing</span></span>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+          <div class="search-container">
+            <input type="text" id="tool-search" placeholder="Search tools..." autocomplete="off">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
           </div>
-          
-          <div id="tools-content">
-            <div class="tools-grid">
+          <div class="search-results-count" id="search-count"></div>
+        </div>
 
-                <div class="tool-card">                    
-                    <div class="tool-info">
-                        <a href="base64/index.html">
-                            <h3>Base64 Debugger</h3>
-                        </a>            
-                            <p>Tool for encoding and decoding strings in Base64. Useful for working with binary data in text format.</p>                            
-                        </div>
-                    </div><br>
+        <div id="tools-content">
+          <div class="tools-grid" id="tools-grid">
 
-                    <div class="tool-card">                        
-                        <div class="tool-info">
-                            <a href="jwt/index.html">
-                                <h3>JWT Debugger</h3>
-                            </a>
-                            <p>Tool for validating and decoding JWT (JSON Web Tokens). View token contents and check their validity.</p>
-                        </div>
-                    </div><br>
-
-                    <div class="tool-card">
-                        <div class="tool-info">
-                            <a href="url/index.html">
-                                <h3>URL Debugger</h3>
-                            </a>
-                            <p>This tool allows you to encode or decode text using <strong>percent-encoding</strong> (URL encoding). Useful for debugging HTTP requests, query parameters, and payloads with special characters.</p>
-                        </div>
-                    </div><br>
-
-                        <div class="tool-card">
-                            <div class="tool-info">
-                                <a href="redirect/index.html">
-                                    <h3>Open Redirect Tester</h3>
-                                </a>
-                                <p>Enter a URL with a redirection parameter (e.g. <code>?url=</code>, <code>?next=</code>) and we will test it against common open redirect payloads.</p>
-                            </div>
-                        </div><br>  
-                        <div class="tool-card">
-                            <div class="tool-info">
-                                <a href="domain/extractor/index.html">
-                                    <h3>Domain Extractor</h3>
-                                </a>
-                                <p>This tool extracts domains from raw text or a full webpage. You can paste any text or enter a URL, and we'll extract all valid domains.</p>
-                            </div>
-                        </div><br>
-
-                        <div class="tool-card">
-                            <div class="tool-info">
-                                <a href="js-secrets/index.html">
-                                    <h3>JavaScript Secrets Finder</h3>
-                                </a>
-                                <p>Find API keys, tokens, and sensitive data in JavaScript code. Perfect for bug bounty reconnaissance and security audits.</p>
-                            </div>
-                        </div><br>
-
-                        <div class="tool-card">
-                            <div class="tool-info">
-                                <a href="headers/index.html">
-                                    <h3>HTTP Headers Analyzer</h3>
-                                </a>
-                                <p>Analyze HTTP security headers to identify vulnerabilities and misconfigurations. Essential for web security audits.</p>
-                            </div>
-                        </div><br>
-
-                        <div class="tool-card">
-                            <div class="tool-info">
-                                <a href="domain/takeover/index.html">
-                                    <h3>Subdomain Takeover Checker</h3>
-                                </a>
-                                <p>Detect subdomains vulnerable to takeover attacks. Check for unclaimed services and DNS misconfigurations.</p>
-                            </div>
-                        </div><br>              
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="base64/index.html">
+                  <h3>Base64 Debugger</h3>
+                </a>
+                <p>Tool for encoding and decoding strings in Base64. Useful for working with binary data in text format.
+                </p>
+              </div>
             </div>
-           </div>
-    </main>
 
-    <footer>      
-        <div class="footer">
-          <div class="footer-text">
-            <img src="./src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px"> <span id="current-year"></span> Adriano Freitas
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="jwt/index.html">
+                  <h3>JWT Debugger</h3>
+                </a>
+                <p>Tool for validating and decoding JWT (JSON Web Tokens). View token contents and check their validity.
+                </p>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="url/index.html">
+                  <h3>URL Debugger</h3>
+                </a>
+                <p>This tool allows you to encode or decode text using <strong>percent-encoding</strong> (URL encoding).
+                  Useful for debugging HTTP requests, query parameters, and payloads with special characters.</p>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="redirect/index.html">
+                  <h3>Open Redirect Tester</h3>
+                </a>
+                <p>Enter a URL with a redirection parameter (e.g. <code>?url=</code>, <code>?next=</code>) and we will
+                  test it against common open redirect payloads.</p>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="domain/extractor/index.html">
+                  <h3>Domain Extractor</h3>
+                </a>
+                <p>This tool extracts domains from raw text or a full webpage. You can paste any text or enter a URL,
+                  and we'll extract all valid domains.</p>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="js-secrets/index.html">
+                  <h3>JavaScript Secrets Finder</h3>
+                </a>
+                <p>Find API keys, tokens, and sensitive data in JavaScript code. Perfect for bug bounty reconnaissance
+                  and security audits.</p>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="headers/index.html">
+                  <h3>HTTP Headers Analyzer</h3>
+                </a>
+                <p>Analyze HTTP security headers to identify vulnerabilities and misconfigurations. Essential for web
+                  security audits.</p>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="domain/takeover/index.html">
+                  <h3>Subdomain Takeover Checker</h3>
+                </a>
+                <p>Detect subdomains vulnerable to takeover attacks. Check for unclaimed services and DNS
+                  misconfigurations.</p>
+              </div>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <a href="crlf/index.html">
+                  <h3>CRLF Injection Tester</h3>
+                </a>
+                <p>Generate CRLF injection payloads to test for HTTP header injection, response splitting, and log injection vulnerabilities.</p>
+              </div>
+            </div>
           </div>
         </div>
+    </main>
+
+    <footer>
+      <div class="footer">
+        <div class="footer-text">
+          <img src="./src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px">
+          <span id="current-year"></span> DRIAN
+        </div>
       </div>
-    </footer>
+  </div>
+  </footer>
   </div>
 
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
   </script>
+  <!--all the divisions-->
+  <script src="./src/js/jquery.min.js" defer></script>
+  <script src="./src/js/particles.js"></script>
+  <script src="./src/js/index.js" defer></script>
+
+
+  <!--particles script-->
+  <script>
+    window.addEventListener('load', function () {
+      console.log('Window loaded, initializing particles...');
+
+      // Check if particles element exists
+      const particlesEl = document.getElementById('particles');
+      console.log('Particles element:', particlesEl);
+
+      if (typeof particlesJS !== 'undefined') {
+        console.log('particlesJS is available');
+
+        // Small delay to ensure everything is ready
+        setTimeout(function () {
+          particlesJS("particles", {
+            "particles": {
+              "number": {
+                "value": 80,
+                "density": {
+                  "enable": true,
+                  "value_area": 1200
+                }
+              },
+              "color": {
+                "value": ["#8a4ff9", "#9d5afa", "#6b3cd4", "#b470fb", "#7c3ff5", "#a055ff"]
+              },
+              "shape": {
+                "type": ["circle", "triangle", "edge"],
+                "stroke": {
+                  "width": 1.0,
+                  "color": "#8a4ff9"
+                },
+                "polygon": {
+                  "nb_sides": 3
+                }
+              },
+              "opacity": {
+                "value": 0.8,
+                "random": true,
+                "anim": {
+                  "enable": true,
+                  "speed": 1.5,
+                  "opacity_min": 0.05,
+                  "sync": false
+                }
+              },
+              "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                  "enable": true,
+                  "speed": 2.5,
+                  "size_min": 0.2,
+                  "sync": false
+                }
+              },
+              "line_linked": {
+                "enable": true,
+                "distance": 100,
+                "color": "#b4befe",
+                "opacity": 0.4,
+                "width": 1.0
+              },
+              "move": {
+                "enable": true,
+                "speed": 2.5,
+                "direction": "none",
+                "random": true,
+                "straight": false,
+                "out_mode": "bounce",
+                "bounce": true,
+                "attract": {
+                  "enable": true,
+                  "rotateX": 1000,
+                  "rotateY": 1000
+                }
+              }
+            },
+            "interactivity": {
+              "detect_on": "canvas",
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": ["grab", "bubble"]
+                },
+                "onclick": {
+                  "enable": true,
+                  "mode": "repulse"
+                },
+                "resize": true
+              },
+              "modes": {
+                "grab": {
+                  "distance": 180,
+                  "line_linked": {
+                    "opacity": 0.9
+                  }
+                },
+                "bubble": {
+                  "distance": 250,
+                  "size": 16,
+                  "duration": 1.5,
+                  "opacity": 1,
+                  "speed": 4
+                },
+                "repulse": {
+                  "distance": 180,
+                  "duration": 0.8
+                },
+                "push": {
+                  "particles_nb": 8
+                },
+                "remove": {
+                  "particles_nb": 4
+                }
+              }
+            },
+            "retina_detect": true
+          });
+          console.log('particles.js initialized');
+        }, 100);
+      } else {
+        console.error('particlesJS is not defined');
+      }
+    });
+  </script>
+
+  <!-- Search Functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const searchInput = document.getElementById('tool-search');
+      const searchCount = document.getElementById('search-count');
+      const toolsGrid = document.getElementById('tools-grid');
+      const toolCards = document.querySelectorAll('.tool-card');
+
+      // Create no results message
+      const noResultsDiv = document.createElement('div');
+      noResultsDiv.className = 'no-results';
+      noResultsDiv.innerHTML = `
+        <div class="icon">🔍</div>
+        <h3>No tools found</h3>
+        <p>Try adjusting your search terms or browse all available tools.</p>
+      `;
+      toolsGrid.parentNode.appendChild(noResultsDiv);
+
+      function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        toolCards.forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const description = card.querySelector('p').textContent.toLowerCase();
+
+          const matches = title.includes(searchTerm) || description.includes(searchTerm);
+
+          if (matches) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        // Update search count
+        if (searchTerm) {
+          searchCount.textContent = `${visibleCount} tool${visibleCount !== 1 ? 's' : ''} found`;
+          searchCount.classList.add('visible');
+        } else {
+          searchCount.classList.remove('visible');
+        }
+
+        // Show/hide no results message
+        if (visibleCount === 0 && searchTerm) {
+          noResultsDiv.classList.add('visible');
+          toolsGrid.style.display = 'none';
+        } else {
+          noResultsDiv.classList.remove('visible');
+          toolsGrid.style.display = 'grid';
+        }
+      }
+
+      // Add search event listeners
+      searchInput.addEventListener('input', performSearch);
+      searchInput.addEventListener('keyup', performSearch);
+
+      // Clear search on escape
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          searchInput.value = '';
+          performSearch();
+          searchInput.blur();
+        }
+      });
+
+      // Focus search with Ctrl+K or Cmd+K
+      document.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>

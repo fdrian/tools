@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="URL Percent-Encoding Debugger – Encode & Decode URLs online">
     <meta name="keywords" content="url, percent encoding, url encode, url decode, debugger, online tool">
-    <meta name="author" content="Adriano Freitas">
+    <meta name="author" content="Drian">
     <title>URL Debugger - Drian</title>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tools.adrianofreitas.me/url/">
-    <meta property="og:title" content="URL Debugger – Adriano Freitas">
+    <meta property="og:url" content="https://tools.fdrian.me/url/">
+    <meta property="og:title" content="URL Debugger – Drian">
     <meta property="og:description" content="Free online tool to encode and decode URLs with percent-encoding">
-    <meta property="og:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+    <meta property="og:image" content="https://fdrian.me/src/images/thumbnail.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://tools.adrianofreitas.me/url/">
-    <meta property="twitter:title" content="URL Debugger – Adriano Freitas">
+    <meta property="twitter:url" content="https://tools.fdrian.me/url/">
+    <meta property="twitter:title" content="URL Debugger – Drian">
     <meta property="twitter:description" content="Free online tool to encode and decode URLs with percent-encoding">
-    <meta property="twitter:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+    <meta property="twitter:image" content="https://fdrian.me/src/images/thumbnail.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../../src/images/favicon/favicon.ico">
@@ -33,79 +34,208 @@
     <link rel="stylesheet" href="../../../src/css/index.css">
     <link rel="stylesheet" href="../../src/css/style.css">
 </head>
+
 <body>
-<div class="tool-container">
-    <header>
-        <div class="logo">
-            <a href="../../index.html">
-                <img src="../../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
-            </a>
-        </div>
-        <h1>URL Debugger</h1>
-        <nav>
-            <ul>
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="../../index.html">Tools</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="particles"></div>
 
-    <main>
-        <div class="tool-description">
-            <p>This tool allows you to encode or decode text using <strong>percent-encoding</strong> (URL encoding). Useful for debugging HTTP requests, query parameters, and payloads with special characters.</p>
-        </div>
+    <div class="tool-container">
+        <header>
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../../src/images/logo.png" alt="Logo Drian" height="16">
+                </a>
+            </div>
+            <h1>URL Debugger</h1>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html">Tools</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <div class="tool-panel">
-            <div class="input-section">
-                <h2>Input</h2>
-                <textarea id="input-text" placeholder="Paste the text or URL to encode/decode"></textarea>
+        <main>
+            <div class="tool-description">
+                <p>This tool allows you to encode or decode text using <strong>percent-encoding</strong> (URL encoding).
+                    Useful for debugging HTTP requests, query parameters, and payloads with special characters.</p>
             </div>
 
-            <div class="actions">
-                <button id="encode-btn" class="action-btn">Encode URL</button>
-                <button id="decode-btn" class="action-btn">Decode URL</button>
-                <button id="clear-btn"   class="action-btn secondary">Clear</button>
-                <button id="copy-btn"    class="action-btn secondary">Copy Result</button>
-                <div class="live-mode-wrapper">
-                    <label class="live-toggle">
-                        <input type="checkbox" id="live-toggle">
-                        Live Mode
-                    </label>
-                    <select id="live-mode-select" disabled>
-                        <option value="encode">Live Encode</option>
-                        <option value="decode">Live Decode</option>
-                    </select>
+            <div class="tool-panel">
+                <div class="input-section">
+                    <h2>Input</h2>
+                    <textarea id="input-text" placeholder="Paste the text or URL to encode/decode"></textarea>
                 </div>
-                
+
+                <div class="actions">
+                    <button id="encode-btn" class="action-btn">Encode URL</button>
+                    <button id="decode-btn" class="action-btn">Decode URL</button>
+                    <button id="clear-btn" class="action-btn secondary">Clear</button>
+                    <button id="copy-btn" class="action-btn secondary">Copy Result</button>
+                    <div class="live-mode-wrapper">
+                        <label class="live-toggle">
+                            <input type="checkbox" id="live-toggle">
+                            Live Mode
+                        </label>
+                        <select id="live-mode-select" disabled>
+                            <option value="encode">Live Encode</option>
+                            <option value="decode">Live Decode</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="output-section">
+                    <h2>Result</h2>
+                    <textarea id="output-text" readonly placeholder="The result will appear here"></textarea>
+                </div>
             </div>
-            
 
-            <div class="output-section">
-                <h2>Result</h2>
-                <textarea id="output-text" readonly placeholder="The result will appear here"></textarea>
+            <div class="tool-info">
+                <h3>Why use URL encoding?</h3>
+                <ul>
+                    <li>Escape parameters that include spaces, <code>&amp;</code>, <code>=</code>, <code>?</code>, etc.
+                    </li>
+                    <li>Safely inject payloads into PoCs for XSS or SQLi testing.</li>
+                    <li>Inspect redirects and chained URLs during web penetration testing.</li>
+                </ul>
             </div>
-        </div>
+        </main>
 
-        <div class="tool-info">
-            <h3>Why use URL encoding?</h3>
-            <ul>
-                <li>Escape parameters that include spaces, <code>&amp;</code>, <code>=</code>, <code>?</code>, etc.</li>
-                <li>Safely inject payloads into PoCs for XSS or SQLi testing.</li>
-                <li>Inspect redirects and chained URLs during web penetration testing.</li>
-            </ul>
-        </div>
-    </main>
-
-    <footer>      
-        <div class="footer">
-          <div class="footer-text">
-            <img src="../../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px"> <span id="current-year"></span> Adriano Freitas
-          </div>
-        </div>
-      </div>
+        <footer>
+            <div class="footer">
+                <div class="footer-text">
+                    <img src="../../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images"
+                        height="14px"> <span id="current-year"></span> Drian
+                </div>
+            </div>
+    </div>
     </footer>
-</div>
+    </div>
 
-<script src="script.js"></script>
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+    
+    <!-- Add particles.js -->
+    <script src="../../src/js/particles.js"></script>
+    
+    <!-- Particles initialization -->
+    <script>
+        window.addEventListener('load', function () {
+            if (typeof particlesJS !== 'undefined') {
+                setTimeout(function () {
+                    particlesJS("particles", {
+                        "particles": {
+                            "number": {
+                                "value": 80,
+                                "density": {
+                                    "enable": true,
+                                    "value_area": 1200
+                                }
+                            },
+                            "color": {
+                                "value": ["#8a4ff9", "#9d5afa", "#6b3cd4", "#b470fb", "#7c3ff5", "#a055ff"]
+                            },
+                            "shape": {
+                                "type": ["circle", "triangle", "edge"],
+                                "stroke": {
+                                    "width": 1.0,
+                                    "color": "#8a4ff9"
+                                },
+                                "polygon": {
+                                    "nb_sides": 3
+                                }
+                            },
+                            "opacity": {
+                                "value": 0.8,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 1.5,
+                                    "opacity_min": 0.05,
+                                    "sync": false
+                                }
+                            },
+                            "size": {
+                                "value": 3,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 2.5,
+                                    "size_min": 0.2,
+                                    "sync": false
+                                }
+                            },
+                            "line_linked": {
+                                "enable": true,
+                                "distance": 100,
+                                "color": "#b4befe",
+                                "opacity": 0.4,
+                                "width": 1.0
+                            },
+                            "move": {
+                                "enable": true,
+                                "speed": 2.5,
+                                "direction": "none",
+                                "random": true,
+                                "straight": false,
+                                "out_mode": "bounce",
+                                "bounce": true,
+                                "attract": {
+                                    "enable": true,
+                                    "rotateX": 1000,
+                                    "rotateY": 1000
+                                }
+                            }
+                        },
+                        "interactivity": {
+                            "detect_on": "canvas",
+                            "events": {
+                                "onhover": {
+                                    "enable": true,
+                                    "mode": ["grab", "bubble"]
+                                },
+                                "onclick": {
+                                    "enable": true,
+                                    "mode": "repulse"
+                                },
+                                "resize": true
+                            },
+                            "modes": {
+                                "grab": {
+                                    "distance": 180,
+                                    "line_linked": {
+                                        "opacity": 0.9
+                                    }
+                                },
+                                "bubble": {
+                                    "distance": 250,
+                                    "size": 16,
+                                    "duration": 1.5,
+                                    "opacity": 1,
+                                    "speed": 4
+                                },
+                                "repulse": {
+                                    "distance": 180,
+                                    "duration": 0.8
+                                },
+                                "push": {
+                                    "particles_nb": 8
+                                },
+                                "remove": {
+                                    "particles_nb": 4
+                                }
+                            }
+                        },
+                        "retina_detect": true
+                    });
+                }, 100);
+            }
+        });
+    </script>
+    
+    <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CRLF Injection Tester - Generate payloads to test for HTTP header injection and response splitting vulnerabilities" />
+    <meta name="keywords" content="crlf, injection, http, header, response splitting, security, testing, bug bounty" />
+    <meta name="author" content="Drian" />
+    <title>CRLF Injection Tester - Drian</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.fdrian.me/crlf/">
+    <meta property="og:title" content="CRLF Injection Tester - Drian Tools">
+    <meta property="og:description" content="Generate CRLF injection payloads to test for HTTP header injection and response splitting vulnerabilities">
+    <meta property="og:image" content="https://fdrian.me/src/images/thumbnail.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.fdrian.me/crlf/">
+    <meta property="twitter:title" content="CRLF Injection Tester - Drian Tools">
+    <meta property="twitter:description" content="Generate CRLF injection payloads to test for HTTP header injection and response splitting vulnerabilities">
+    <meta property="twitter:image" content="https://fdrian.me/src/images/thumbnail.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../src/images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../src/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../src/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../src/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../src/css/index.css">
+    <link rel="stylesheet" href="../src/css/style.css">
+</head>
+<body>
+    <div class="tool-container">
+        <header>
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../src/images/logo.png" alt="Logo Drian" height="16">
+                </a>
+            </div>
+            <h1>CRLF Injection Tester</h1>
+            <nav>
+                <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html">Tools</a></li>   
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-description">
+                <p>Generate CRLF injection payloads to test for HTTP header injection, response splitting, and log injection vulnerabilities. CRLF (Carriage Return Line Feed) injection can lead to serious security issues when user input is reflected in HTTP headers.</p>
+            </div>
+        
+            <div class="tool-panel">
+                <div class="input-section">
+                    <h2>Target Configuration</h2>
+                    <div class="input-group">
+                        <label for="target-url">Target URL</label>
+                        <input type="text" id="target-url" placeholder="https://example.com/redirect?url=" />
+                    </div>
+                    <div class="input-group">
+                        <label for="parameter-name">Parameter Name</label>
+                        <input type="text" id="parameter-name" placeholder="url, redirect, next, return..." value="url" />
+                    </div>
+                    <div class="input-group">
+                        <label for="custom-payload">Custom Payload (optional)</label>
+                        <input type="text" id="custom-payload" placeholder="Custom value to inject after CRLF" />
+                    </div>
+                </div>
+
+                <div class="payload-options">
+                    <h2>Payload Configuration</h2>
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <h3>Attack Type</h3>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" id="header-injection" checked> Header Injection</label>
+                                <label><input type="checkbox" id="response-splitting" checked> Response Splitting</label>
+                                <label><input type="checkbox" id="log-injection" checked> Log Injection</label>
+                                <label><input type="checkbox" id="xss-injection"> XSS via Headers</label>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <h3>Encoding</h3>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" id="url-encode" checked> URL Encoding</label>
+                                <label><input type="checkbox" id="double-encode"> Double URL Encoding</label>
+                                <label><input type="checkbox" id="unicode-encode"> Unicode Encoding</label>
+                                <label><input type="checkbox" id="mixed-encode"> Mixed Encoding</label>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <h3>Bypass Techniques</h3>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" id="space-variations"> Space Variations</label>
+                                <label><input type="checkbox" id="null-bytes"> Null Byte Injection</label>
+                                <label><input type="checkbox" id="case-variations"> Case Variations</label>
+                                <label><input type="checkbox" id="tab-variations"> Tab Variations</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="actions">
+                    <button id="generate-btn" class="action-btn">Generate Payloads</button>
+                    <button id="copy-all-btn" class="action-btn secondary">Copy All</button>
+                    <button id="clear-btn" class="action-btn secondary">Clear</button>
+                </div>
+
+                <div class="output-section">
+                    <div class="output-tabs">
+                        <button class="tab-btn active" data-tab="payloads">Generated Payloads</button>
+                        <button class="tab-btn" data-tab="test-urls">Test URLs</button>
+                        <button class="tab-btn" data-tab="curl-commands">cURL Commands</button>
+                    </div>
+                    <div class="tab-content">
+                        <div id="payloads-tab" class="tab-pane active">
+                            <h3>Generated CRLF Payloads</h3>
+                            <div id="payloads-output" class="payloads-container">
+                                <p class="placeholder">Click "Generate Payloads" to see the results</p>
+                            </div>
+                        </div>
+                        <div id="test-urls-tab" class="tab-pane">
+                            <h3>Complete Test URLs</h3>
+                            <div id="urls-output" class="urls-container">
+                                <p class="placeholder">Generate payloads first to see complete test URLs</p>
+                            </div>
+                        </div>
+                        <div id="curl-commands-tab" class="tab-pane">
+                            <h3>cURL Test Commands</h3>
+                            <div id="curl-output" class="curl-container">
+                                <p class="placeholder">Generate payloads first to see cURL commands</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payload-stats" id="payload-stats" style="display: none;">
+                <div class="stat-item">
+                    <span class="stat-label">Total Payloads:</span>
+                    <span class="stat-value" id="total-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Attack Types:</span>
+                    <span class="stat-value" id="attack-types">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Encoding Variants:</span>
+                    <span class="stat-value" id="encoding-variants">0</span>
+                </div>
+            </div>
+        
+            <div class="tool-info">
+                <h3>About CRLF Injection</h3>
+                <p><strong>CRLF Injection</strong> occurs when an attacker can inject Carriage Return (\r) and Line Feed (\n) characters into an application's output. This can lead to several serious vulnerabilities:</p>
+                
+                <div class="vulnerability-types">
+                    <div class="vuln-type">
+                        <h4>HTTP Header Injection</h4>
+                        <p>Inject arbitrary HTTP headers to manipulate server responses, set cookies, or bypass security controls.</p>
+                    </div>
+                    
+                    <div class="vuln-type">
+                        <h4>HTTP Response Splitting</h4>
+                        <p>Split HTTP responses to inject malicious content, potentially leading to cache poisoning or XSS attacks.</p>
+                    </div>
+                    
+                    <div class="vuln-type">
+                        <h4>Log Injection</h4>
+                        <p>Inject false entries into log files, potentially hiding malicious activities or confusing administrators.</p>
+                    </div>
+                    
+                    <div class="vuln-type">
+                        <h4>Security Bypass</h4>
+                        <p>Bypass security measures like CSP headers, authentication mechanisms, or access controls.</p>
+                    </div>
+                </div>
+
+                <div class="testing-tips">
+                    <h4>Testing Tips</h4>
+                    <ul>
+                        <li>Look for parameters that get reflected in HTTP headers (redirect URLs, error messages)</li>
+                        <li>Test common parameters: <code>url</code>, <code>redirect</code>, <code>next</code>, <code>return</code>, <code>goto</code></li>
+                        <li>Check for different encoding bypasses if basic CRLF is filtered</li>
+                        <li>Monitor HTTP responses for injected headers or content</li>
+                        <li>Test both GET and POST parameters</li>
+                        <li>Use Burp Suite or similar tools to see the raw HTTP responses</li>
+                    </ul>
+                </div>
+
+                <div class="common-payloads">
+                    <h4>Common Test Scenarios</h4>
+                    <ul>
+                        <li><strong>Header Injection:</strong> <code>%0d%0aSet-Cookie: admin=true</code></li>
+                        <li><strong>Response Splitting:</strong> <code>%0d%0a%0d%0a&lt;script&gt;alert('XSS')&lt;/script&gt;</code></li>
+                        <li><strong>Cache Poisoning:</strong> <code>%0d%0aContent-Type: text/html%0d%0a%0d%0a&lt;h1&gt;Cached&lt;/h1&gt;</code></li>
+                        <li><strong>Log Injection:</strong> <code>%0d%0aFake: Admin logged in successfully</code></li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        
+        <footer>      
+            <div class="footer">
+            <div class="footer-text">
+                <img src="../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px"> <span id="current-year"></span> DRIAN
+            </div>
+            </div>
+        </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

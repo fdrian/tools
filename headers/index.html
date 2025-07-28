@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="HTTP Headers Analyzer - Analyze security headers and detect vulnerabilities">
     <meta name="keywords" content="http headers, security headers, CSP, HSTS, X-Frame-Options, security analysis">
-    <meta name="author" content="Adriano Freitas">
+    <meta name="author" content="Drian">
     <title>HTTP Headers Analyzer - Drian</title>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tools.adrianofreitas.me/headers/">
-    <meta property="og:title" content="HTTP Headers Analyzer - Adriano Freitas">
+    <meta property="og:url" content="https://tools.fdrian.me/headers/">
+    <meta property="og:title" content="HTTP Headers Analyzer - Drian">
     <meta property="og:description" content="Analyze HTTP security headers and detect vulnerabilities">
-    <meta property="og:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+    <meta property="og:image" content="https://fdrian.me/src/images/thumbnail.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://tools.adrianofreitas.me/headers/">
-    <meta property="twitter:title" content="HTTP Headers Analyzer - Adriano Freitas">
+    <meta property="twitter:url" content="https://tools.fdrian.me/headers/">
+    <meta property="twitter:title" content="HTTP Headers Analyzer - Drian">
     <meta property="twitter:description" content="Analyze HTTP security headers and detect vulnerabilities">
-    <meta property="twitter:image" content="https://adrianofreitas.me/src/images/thumbnail.png">
+    <meta property="twitter:image" content="https://fdrian.me/src/images/thumbnail.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../../src/images/favicon/favicon.ico">
@@ -33,133 +34,261 @@
     <link rel="stylesheet" href="../../src/css/index.css">
     <link rel="stylesheet" href="../../src/css/style.css">
 </head>
+
 <body>
-<div class="tool-container">
-    <header>
-        <div class="logo">
-            <a href="../../index.html">
-                <img src="../../src/images/logo.png" alt="Logo Adriano Freitas" height="16">
-            </a>
-        </div>
-        <h1>HTTP Headers Analyzer</h1>
-        <nav>
-            <ul>
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="../../index.html">Tools</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="particles"></div>
 
-    <main>
-        <div class="tool-description">
-            <p>Analyze <strong>HTTP security headers</strong> to identify vulnerabilities and security misconfigurations. Perfect for web security audits, penetration testing, and compliance checks.</p>
-        </div>
+    <div class="tool-container">
+        <header>
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../src/images/logo.png" alt="Logo Drian" height="16">
+                </a>
+            </div>
+            <h1>HTTP Headers Analyzer</h1>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../index.html">Tools</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <div class="tool-panel">
-            <div class="input-section">
-                <div class="input-tabs">
-                    <button id="url-tab" class="tab-btn active">Analyze URL</button>
-                    <button id="headers-tab" class="tab-btn">Paste Headers</button>
-                </div>
-                
-                <div id="url-input" class="input-container active">
-                    <h2>Enter URL to Analyze</h2>
-                    <input type="url" id="target-url" placeholder="https://example.com">
-                    <div class="options">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="follow-redirects" checked>
-                            Follow redirects
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="check-subdomains">
-                            Check common subdomains
-                        </label>
+        <main>
+            <div class="tool-description">
+                <p>Analyze <strong>HTTP security headers</strong> to identify vulnerabilities and security
+                    misconfigurations. Perfect for web security audits, penetration testing, and compliance checks.</p>
+            </div>
+
+            <div class="tool-panel">
+                <div class="input-section">
+                    <div class="input-tabs">
+                        <button id="url-tab" class="tab-btn active">Analyze URL</button>
+                        <button id="headers-tab" class="tab-btn">Paste Headers</button>
                     </div>
-                    <button id="analyze-btn" class="action-btn">Analyze Headers</button>
-                </div>
-                
-                <div id="headers-input" class="input-container">
-                    <h2>Paste Raw Headers</h2>
-                    <textarea id="raw-headers" placeholder="HTTP/1.1 200 OK
+
+                    <div id="url-input" class="input-container active">
+                        <h2>Enter URL to Analyze</h2>
+                        <input type="url" id="target-url" placeholder="https://example.com">
+                        <div class="options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="follow-redirects" checked>
+                                Follow redirects
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="check-subdomains">
+                                Check common subdomains
+                            </label>
+                        </div>
+                        <button id="analyze-btn" class="action-btn">Analyze Headers</button>
+                    </div>
+
+                    <div id="headers-input" class="input-container">
+                        <h2>Paste Raw Headers</h2>
+                        <textarea id="raw-headers" placeholder="HTTP/1.1 200 OK
 Server: nginx/1.18.0
 Content-Type: text/html; charset=UTF-8
 X-Frame-Options: DENY
 Content-Security-Policy: default-src 'self'
 ..."></textarea>
-                    <button id="parse-btn" class="action-btn">Parse Headers</button>
-                </div>
-            </div>
-
-            <div class="actions">
-                <button id="clear-btn" class="action-btn secondary">Clear</button>
-                <button id="copy-btn" class="action-btn secondary">Copy Report</button>
-                <button id="export-btn" class="action-btn secondary">Export JSON</button>
-            </div>
-
-            <div class="output-section">
-                <h2>Analysis Results</h2>
-                <div id="results-container">
-                    <div id="loading" class="hidden">
-                        <div class="spinner"></div>
-                        <p>Analyzing headers...</p>
-                    </div>
-                    <div id="results" class="results-content">
-                        <p class="placeholder">Enter a URL or paste headers to begin analysis...</p>
+                        <button id="parse-btn" class="action-btn">Parse Headers</button>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="tool-info">
-            <h3>Security Headers Analyzed:</h3>
-            <div class="info-grid">
-                <div class="info-item">
-                    <h4>Content Security Policy (CSP)</h4>
-                    <p>Prevents XSS attacks by controlling resource loading</p>
+                <div class="actions">
+                    <button id="clear-btn" class="action-btn secondary">Clear</button>
+                    <button id="copy-btn" class="action-btn secondary">Copy Report</button>
+                    <button id="export-btn" class="action-btn secondary">Export JSON</button>
                 </div>
-                <div class="info-item">
-                    <h4>HTTP Strict Transport Security (HSTS)</h4>
-                    <p>Forces HTTPS connections and prevents downgrade attacks</p>
-                </div>
-                <div class="info-item">
-                    <h4>X-Frame-Options</h4>
-                    <p>Prevents clickjacking attacks by controlling framing</p>
-                </div>
-                <div class="info-item">
-                    <h4>X-Content-Type-Options</h4>
-                    <p>Prevents MIME type sniffing vulnerabilities</p>
-                </div>
-                <div class="info-item">
-                    <h4>Referrer-Policy</h4>
-                    <p>Controls how much referrer information is sent</p>
-                </div>
-                <div class="info-item">
-                    <h4>Permissions-Policy</h4>
-                    <p>Controls which browser features can be used</p>
+
+                <div class="output-section">
+                    <h2>Analysis Results</h2>
+                    <div id="results-container">
+                        <div id="loading" class="hidden">
+                            <div class="spinner"></div>
+                            <p>Analyzing headers...</p>
+                        </div>
+                        <div id="results" class="results-content">
+                            <p class="placeholder">Enter a URL or paste headers to begin analysis...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <h3>Perfect for:</h3>
-            <ul>
-                <li>Web security audits and penetration testing</li>
-                <li>Compliance checks (OWASP, PCI DSS, etc.)</li>
-                <li>Bug bounty reconnaissance and analysis</li>
-                <li>Security header implementation validation</li>
-                <li>Identifying missing or misconfigured headers</li>
-                <li>Comparing security posture across domains</li>
-            </ul>
-        </div>
-    </main>
 
-    <footer>
-        <div class="footer">
-            <div class="footer-text">
-                <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images" height="14px"> <span id="current-year"></span> Adriano Freitas
+            <div class="tool-info">
+                <h3>Security Headers Analyzed:</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>Content Security Policy (CSP)</h4>
+                        <p>Prevents XSS attacks by controlling resource loading</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>HTTP Strict Transport Security (HSTS)</h4>
+                        <p>Forces HTTPS connections and prevents downgrade attacks</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>X-Frame-Options</h4>
+                        <p>Prevents clickjacking attacks by controlling framing</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>X-Content-Type-Options</h4>
+                        <p>Prevents MIME type sniffing vulnerabilities</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Referrer-Policy</h4>
+                        <p>Controls how much referrer information is sent</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Permissions-Policy</h4>
+                        <p>Controls which browser features can be used</p>
+                    </div>
+                </div>
+
+                <h3>Perfect for:</h3>
+                <ul>
+                    <li>Web security audits and penetration testing</li>
+                    <li>Compliance checks (OWASP, PCI DSS, etc.)</li>
+                    <li>Bug bounty reconnaissance and analysis</li>
+                    <li>Security header implementation validation</li>
+                    <li>Identifying missing or misconfigured headers</li>
+                    <li>Comparing security posture across domains</li>
+                </ul>
             </div>
-        </div>
-    </footer>
-</div>
+        </main>
 
-<script src="script.js"></script>
+        <footer>
+            <div class="footer">
+                <div class="footer-text">
+                    <img src="../../src/images/icons/creative-commons.png" alt="Creative Commons Icon" class="images"
+                        height="14px"> <span id="current-year"></span> Drian
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+    
+    <!-- Add particles.js -->
+    <script src="../../src/js/particles.js"></script>
+    
+    <!-- Particles initialization -->
+    <script>
+        window.addEventListener('load', function () {
+            if (typeof particlesJS !== 'undefined') {
+                setTimeout(function () {
+                    particlesJS("particles", {
+                        "particles": {
+                            "number": {
+                                "value": 80,
+                                "density": {
+                                    "enable": true,
+                                    "value_area": 1200
+                                }
+                            },
+                            "color": {
+                                "value": ["#8a4ff9", "#9d5afa", "#6b3cd4", "#b470fb", "#7c3ff5", "#a055ff"]
+                            },
+                            "shape": {
+                                "type": ["circle", "triangle", "edge"],
+                                "stroke": {
+                                    "width": 1.0,
+                                    "color": "#8a4ff9"
+                                },
+                                "polygon": {
+                                    "nb_sides": 3
+                                }
+                            },
+                            "opacity": {
+                                "value": 0.8,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 1.5,
+                                    "opacity_min": 0.05,
+                                    "sync": false
+                                }
+                            },
+                            "size": {
+                                "value": 3,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 2.5,
+                                    "size_min": 0.2,
+                                    "sync": false
+                                }
+                            },
+                            "line_linked": {
+                                "enable": true,
+                                "distance": 100,
+                                "color": "#b4befe",
+                                "opacity": 0.4,
+                                "width": 1.0
+                            },
+                            "move": {
+                                "enable": true,
+                                "speed": 2.5,
+                                "direction": "none",
+                                "random": true,
+                                "straight": false,
+                                "out_mode": "bounce",
+                                "bounce": true,
+                                "attract": {
+                                    "enable": true,
+                                    "rotateX": 1000,
+                                    "rotateY": 1000
+                                }
+                            }
+                        },
+                        "interactivity": {
+                            "detect_on": "canvas",
+                            "events": {
+                                "onhover": {
+                                    "enable": true,
+                                    "mode": ["grab", "bubble"]
+                                },
+                                "onclick": {
+                                    "enable": true,
+                                    "mode": "repulse"
+                                },
+                                "resize": true
+                            },
+                            "modes": {
+                                "grab": {
+                                    "distance": 180,
+                                    "line_linked": {
+                                        "opacity": 0.9
+                                    }
+                                },
+                                "bubble": {
+                                    "distance": 250,
+                                    "size": 16,
+                                    "duration": 1.5,
+                                    "opacity": 1,
+                                    "speed": 4
+                                },
+                                "repulse": {
+                                    "distance": 180,
+                                    "duration": 0.8
+                                },
+                                "push": {
+                                    "particles_nb": 8
+                                },
+                                "remove": {
+                                    "particles_nb": 4
+                                }
+                            }
+                        },
+                        "retina_detect": true
+                    });
+                }, 100);
+            }
+        });
+    </script>
+    
+    <script src="script.js"></script>
 </body>
+
 </html>

@@ -317,7 +317,11 @@ async function generateNewJWT(payload, secret) {
     const encodedPayload = base64UrlEncode(JSON.stringify(payload));
     const message = encodedHeader + '.' + encodedPayload;
     const signature = await generateHMACSignature(message, secret);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fd439155dd930e93e1c910efd964153773fdbe7c
     return message + '.' + signature;
 }
 
@@ -368,7 +372,11 @@ async function generateToken(isLivePreview = false) {
         const payload = JSON.parse(payloadText);
         const newToken = await generateNewJWT(payload, secret);
         displayTokenResult(newToken, payload, isLivePreview);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> fd439155dd930e93e1c910efd964153773fdbe7c
         if (!isLivePreview) {
             showNotification('Token generated successfully!', 'success');
         }
@@ -387,7 +395,11 @@ async function generateToken(isLivePreview = false) {
 let livePreviewTimeout;
 function handleLivePreview() {
     if (!livePreviewCheckbox.checked) return;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fd439155dd930e93e1c910efd964153773fdbe7c
     clearTimeout(livePreviewTimeout);
     livePreviewTimeout = setTimeout(() => {
         generateToken(true);
@@ -439,12 +451,20 @@ clearBtn.addEventListener('click', () => {
     tokenStatus.textContent = '';
     tokenExpiry.textContent = '';
     secretKeySection.style.display = 'none';
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fd439155dd930e93e1c910efd964153773fdbe7c
     // Clear JWT Modifier fields
     if (modifierSecret) modifierSecret.value = '';
     if (payloadEditor) payloadEditor.value = '';
     clearModifierResults();
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fd439155dd930e93e1c910efd964153773fdbe7c
     jwtInput.focus();
     showNotification('Fields cleared');
 });
@@ -460,7 +480,11 @@ if (generateTokenBtn) {
 if (payloadEditor && livePreviewCheckbox) {
     payloadEditor.addEventListener('input', handleLivePreview);
     modifierSecret.addEventListener('input', handleLivePreview);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fd439155dd930e93e1c910efd964153773fdbe7c
     livePreviewCheckbox.addEventListener('change', () => {
         if (livePreviewCheckbox.checked) {
             handleLivePreview();
